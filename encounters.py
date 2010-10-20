@@ -13,14 +13,10 @@ from stuff.drawing import *
 from stuff.term import oppts
 from powers import virus
 
-poop = virus.virus()
-poop.gameSetup()
-
 oppts(sys.argv[1:])
 
-
 def newPlayer(n, name, planets, ships, crd):
-  newplayer = player(n, name, planets, ships, crd)
+  newplayer = virus.virus(n, name, planets, ships, crd)
   players.append(newplayer)
   warp[newplayer] = 0
   mothership[newplayer] = 0
