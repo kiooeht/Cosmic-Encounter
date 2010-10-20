@@ -55,3 +55,54 @@ class deck:
     print("")
     print("|    | |    |")
     print("+----+ +----+")
+
+  def showDeck(self):
+    l = len(self.cards)
+    lt = len(self.cards)
+    while lt >= 7:
+      for x in range(0+(l-lt),7+(l-lt)):
+        sys.stdout.write(str(x))
+        if x < 10: sys.stdout.write("-")
+        sys.stdout.write("---+ ")
+      print("")
+      for x in range(0+(l-lt),7+(l-lt)):
+        sys.stdout.write("|    | ")
+      print("")
+      for x in range(0+(l-lt),7+(l-lt)):
+        sys.stdout.write("| ")
+        if self.cards[x] == 99: sys.stdout.write("N ")
+        else:
+          if self.cards[x] < 10: sys.stdout.write("0")
+          sys.stdout.write(str(self.cards[x]))
+        sys.stdout.write(" | ")
+      print("")
+      for x in range(0+(l-lt),7+(l-lt)):
+        sys.stdout.write("|    | ")
+      print("")
+      for x in range(0+(l-lt),7+(l-lt)):
+        sys.stdout.write("+----+ ")
+      print("")
+      lt -= 7
+    if lt != 0:
+      for x in range(l-lt,l):
+        sys.stdout.write(str(x))
+        if x < 10: sys.stdout.write("-")
+        sys.stdout.write("---+ ")
+      print("")
+      for x in range(l-lt,l):
+        sys.stdout.write("|    | ")
+      print("")
+      for x in range(l-lt,l):
+        sys.stdout.write("| ")
+        if self.cards[x] == 99: sys.stdout.write("N ")
+        else:
+          if self.cards[x] < 10: sys.stdout.write("0")
+          sys.stdout.write(str(self.cards[x]))
+        sys.stdout.write(" | ")
+      print("")
+      for x in range(l-lt,l):
+        sys.stdout.write("|    | ")
+      print("")
+      for x in range(l-lt,l):
+        sys.stdout.write("+----+ ")
+      print("")
