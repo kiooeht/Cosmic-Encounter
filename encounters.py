@@ -11,6 +11,10 @@ from stuff.planet import *
 from stuff.deck import *
 from stuff.drawing import *
 from stuff.term import oppts
+from powers import virus
+
+poop = virus.virus()
+poop.gameSetup()
 
 oppts(sys.argv[1:])
 
@@ -76,6 +80,7 @@ def main():
         if names[x].lower() == name.lower():
           print("Player name already exists, please pick a new name")
           print("Like Spaghatta Nadle, that would be a cool name")
+          print("Too bad it's too long!! HAHA!! =P")
           exist = True
       if len(name) > 7:
         print("Player name too long. Must be 7 characters or less")
@@ -288,7 +293,7 @@ def main():
         print("That does not exist in your hand")
 
     #reveal
-    res = reveal(plyr,offCard,desCard,defCard,choice)
+    res = drawReveal(plyr,offCard,desCard,defCard,choice)
 
     #resolution
     if str(res[0]) != "N" and str(res[1]) != "N":

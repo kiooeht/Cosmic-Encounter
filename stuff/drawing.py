@@ -21,56 +21,63 @@ def printStats():
     print("\t ",stats[2],"\t    ",stats[3],"\t      ",stats[4])
   print("")
 
-def reveal(offP,crd1, defP,crd2,pNum):
-  returny_stuff = [None]*2
+def drawReveal(offP,crd1, defP,crd2,pNum):
+  offAttack = offP.reveal(crd1, -1)
+  defAttack = defP.reveal(crd2, pNum)
+
   print("Offense   Defense")
   print("+----+    +----+")
   print("|    |    |    |")
   print("| ",end='')
-  if crd1 == 99:
-    print("N ",end='')
-    returny_stuff[0] = "N"
-  else:
-    if crd1 < 10: print("0",end='')
-    print(crd1,end='')
-    returny_stuff[0] = crd1
+  if offAttack[0] != "N" and offAttack[0] < 10: print("0",end='')
+  print(offAttack[0],end='')
+  if offAttack[0] == "N": print(" ",end='')
   print(" | VS | ",end='')
-  if crd2 == 99:
-    print("N ",end='')
-    returny_stuff[1] = "N"
-  else:
-    if crd2 < 10: print("0",end='')
-    print(crd2,end='')
-    returny_stuff[1] = crd2
+  if defAttack[0] != "N" and defAttack[0] < 10: print("0",end='')
+  print(defAttack[0],end='')
+  if defAttack[0] == "N": print(" ",end='')
   print(" |")
   print("|    |    |    |")
   print("+----+    +----+")
 
-  mC = 0
-  cC = defP.system.planet[int(pNum)].ships[defP]
-  for x in players:
-    mC += mothership[x]
-    cC += carriership[x]
-  if returny_stuff[0] != "N":
-    returny_stuff[0] += mC
-  if returny_stuff[1] != "N":
-    returny_stuff[1] += cC
+  print(" ",end='')
+  for i in range(0,offAttack[1]):
+    print("X",end='')
+  for i in range(offAttack[1],4):
+    print(" ",end='')
+  print("      ",end='')
+  for i in range(0,defAttack[1]):
+    print("X",end='')
+  for i in range(defAttack[1],4):
+    print(" ",end='')
+  print("")
+
+  mC = offAttack[2]
+  cC = defAttack[2]
   while mC > 0 or cC > 0:
     if mC >= 4:
-      print(" XXXX",end='')
+      print(" OOOO",end='')
     else:
       print(" ",end='')
       for x in range(0,mC):
-        print("X",end='')
+        print("O",end='')
       for x in range(mC,4):
         print(" ",end='')
     mC -= 4
     print("      ",end='')
     if cC >=4:
-      print("XXXX")
+      print("OOOO")
     else:
       for x in range(0,cC):
-        print("X",end='')
+        print("O",end='')
       print("")
     cC -= 4
-  return returny_stuff
+
+  print("T: ",end='')
+  if offAttack[3] != "N" and offAttack[3] < 10: print("0",end='')
+  print(offAttack[3],end='')
+  print("     T: ",end='')
+  if defAttack[3] != "N" and defAttack[3] < 10: print("0",end='')
+  print(defAttack[3])
+
+  return [offAttack[3], defAttack[3]]

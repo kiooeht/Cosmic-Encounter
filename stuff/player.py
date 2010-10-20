@@ -200,3 +200,75 @@ class player:
             else:         print("That planet does not exist in this system")
           else:           print("That system does not exist")
         else:             print("Wrong number of arguments")
+
+
+################################################################################
+########## - GAME LOOP FUNCTIONS - #############################################
+################################################################################
+
+# Game Setup
+  def gameSetup(self):
+    print("Game Setup")
+
+# Start Turn
+  def startTurn(self):
+    print("Start Turn")
+
+# Regroup
+  def regroup(self):
+    print("Regroup")
+
+# Destiny
+  def destiny(self):
+    print("Destiny")
+
+# Launch
+  def launch(self):
+    print("Launch")
+
+# Alliances
+  def allyAsk(self):
+    print("Asking for Allies")
+
+  def confirmAlly(self):
+    print("Someone asked you to be Allies")
+
+# Planning
+  def planning(self):
+    print("Planning")
+
+# Reveal
+  def reveal(self,crd, pNum):
+    attackValue = [0]*4
+    if crd == 99:
+      attackValue[0] = "N"
+    else:
+      attackValue[0] = crd
+
+    if pNum == -1:
+      aC = 0
+      for x in players:
+        if x == self:
+          attackValue[1] = mothership[x]
+        else:
+          aC += mothership[x]
+      if attackValue[0] != "N":
+        attackValue[2] = aC
+    else:
+      attackValue[1] = self.system.planet[int(pNum)].ships[self]
+      aC = 0
+      for x in players:
+        aC += carriership[x]
+      if attackValue[0] != "N":
+        attackValue[2] = aC
+
+    if attackValue[0] != "N":
+      attackValue[3] = attackValue[0] + attackValue[1] + attackValue[2]
+    else:
+      attackValue[3] = "N"
+
+    return attackValue
+
+# Resolution
+  def resolution(self):
+    print("Resolution")
