@@ -262,12 +262,16 @@ class player:
       if attackValue[0] != "N":
         attackValue[2] = aC
 
-    if attackValue[0] != "N":
-      attackValue[3] = attackValue[0] + attackValue[1] + attackValue[2]
-    else:
-      attackValue[3] = "N"
+    return self.revealMath(attackValue)
 
-    return attackValue
+  def revealMath(self, aV):
+    print("boo")
+    if aV[0] != "N":
+      aV[3] = aV[0] + aV[1] + aV[2]
+    else:
+      aV[3] = "N"
+
+    return aV
 
 # Resolution
   def resolution(self):
