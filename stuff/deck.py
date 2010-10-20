@@ -72,8 +72,12 @@ class deck:
         sys.stdout.write("| ")
         if self.cards[x] == 99: sys.stdout.write("N ")
         else:
-          if self.cards[x] < 10: sys.stdout.write("0")
-          sys.stdout.write(str(self.cards[x]))
+          if type(self.cards[x]).__name__ != "player":
+            if self.cards[x] < 10: sys.stdout.write("0")
+            sys.stdout.write(str(self.cards[x]))
+          else:
+            if self.cards[x].num < 10: sys.stdout.write("0")
+            sys.stdout.write(str(self.cards[x].num))
         sys.stdout.write(" | ")
       print("")
       for x in range(0+(l-lt),7+(l-lt)):
@@ -96,8 +100,12 @@ class deck:
         sys.stdout.write("| ")
         if self.cards[x] == 99: sys.stdout.write("N ")
         else:
-          if self.cards[x] < 10: sys.stdout.write("0")
-          sys.stdout.write(str(self.cards[x]))
+          if type(self.cards[x]).__name__ != "player":
+            if self.cards[x] < 10: sys.stdout.write("0")
+            sys.stdout.write(str(self.cards[x]))
+          else:
+            if self.cards[x].num < 10: sys.stdout.write("0")
+            sys.stdout.write(str(self.cards[x].num))
         sys.stdout.write(" | ")
       print("")
       for x in range(l-lt,l):
