@@ -3,8 +3,11 @@ import sys
 from stuff.player import *
 
 class virus(player):
-  def __init__(self):
+  def revealMath(self, aV):
     print("yay")
+    if aV[0] != "N":
+      aV[3] = aV[0] * aV[1] + aV[2]
+    else:
+      aV[3] = "N"
 
-  def reveal(self):
-    print("Virus beat yo ass")
+    return aV
