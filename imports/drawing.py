@@ -22,8 +22,18 @@ def printStats():
   print("")
 
 def drawReveal(offP,crd1, defP,crd2,pNum):
-  offAttack = offP.reveal(crd1, -1)
-  defAttack = defP.reveal(crd2, pNum)
+  if offP.oppoRevealBool and defP.oppoRevealBool:
+    offAttack = offP.reveal(crd1, -1)
+    defAttack = defP.reveal(crd2, pNum)
+  elif offP.oppoRevealBool:
+    offAttack = offP.reveal(crd1, -1)
+    defAttack = offP.oppoReveal(defP, crd2, pNum)
+  elif defP.oppoRevealBool:
+    offAttack = defP.oppoReveal(offP, crd1, -1)
+    defAttack = defP.reveal(crd2, pNum)
+  else:
+    offAttack = offP.reveal(crd1, -1)
+    defAttack = defP.reveal(crd2, pNum)
 
   print("Offense   Defense")
   print("+----+    +----+")
