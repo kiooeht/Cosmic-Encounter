@@ -217,7 +217,9 @@ class player:
 
 # Regroup
   def regroup(self):
-    print("Regroup")
+    if self.getWarpCount() > 0:
+      warp[self] -= 1
+      mothership[self] += 1
 
 # Destiny
   def destiny(self,desCards):

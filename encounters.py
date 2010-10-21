@@ -127,11 +127,7 @@ def main():
     print("Starting player turn:",plyr.name)
     prompt = plyr.name + ">> "
 
-    #regroup
-    if plyr.getWarpCount() > 0:
-      warp[plyr] -= 1
-      mothership[plyr] += 1
-
+    plyr.regroup()					#regroup
     desCard = plyr.destiny(destiny)	#destiny
     choice = plyr.launch(desCard)	#launch
 
