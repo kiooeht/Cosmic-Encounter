@@ -132,23 +132,8 @@ def main():
       warp[plyr] -= 1
       mothership[plyr] += 1
 
-    #destiny
-    desCard = None
-    while 1:
-      if len(destiny.cards) == 1:
-        print("Reshuffling destiny deck")
-      desCard = destiny.drawCard(1)[0]
-      destiny.discardCard(desCard)
-      print("Destiny card: "+desCard.name)
-      if desCard.name == plyr.name:
-        attack = input(prompt+"Would you like to attack your own system? [y/N]: ")
-        if attack.lower() == "y":
-          break
-      else:
-        break
-    print("Attacking "+desCard.name+"'s system")
-    #launch
-    choice = plyr.launch(desCard)
+    desCard = plyr.destiny(destiny)	#destiny
+    choice = plyr.launch(desCard)	#launch
 
     #alliances
     ##offense

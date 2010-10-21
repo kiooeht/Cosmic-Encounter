@@ -220,8 +220,22 @@ class player:
     print("Regroup")
 
 # Destiny
-  def destiny(self):
-    print("Destiny")
+  def destiny(self,desCards):
+    dest = None
+    while 1:
+      if len(desCards.cards) == 1:
+        print("Reshuffling destiny deck")
+      dest = desCards.drawCard(1)[0]
+      desCards.discardCard(dest)
+      print("Destiny card: "+dest.name)
+      if dest.name == self.name:
+        attack = input("Would you like to attack your own system? [y/N]: ")
+        if attack.lower() == "y":
+          break
+      else:
+        break
+    print("Attacking "+dest.name+"'s system")
+    return dest
 
 # Launch
   def launch(self,dest):
