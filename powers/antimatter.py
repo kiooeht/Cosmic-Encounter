@@ -44,7 +44,7 @@ class antimatter(player):
       attackValue[1] = oppo.system.planet[int(pNum)].ships[oppo]
       aC = 0
       for x in players:
-        aC += x.shipWorth(casrriership[x])
+        aC += x.shipWorth(carriership[x])
         attackValue[4][x] = carriership[x]
       attackValue[2] = aC
 
