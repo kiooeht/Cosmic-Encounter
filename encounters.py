@@ -127,9 +127,9 @@ def main():
     print("Starting player turn:",plyr.name)
     prompt = plyr.name + ">> "
 
-    plyr.regroup()					#regroup
-    desCard = plyr.destiny(destiny)	#destiny
-    choice = plyr.launch(desCard)	#launch
+    plyr.regroup()          #regroup
+    desCard = plyr.destiny(destiny) #destiny
+    choice = plyr.launch(desCard) #launch
 
     #alliances
     ##offense
@@ -171,8 +171,11 @@ def main():
       if x != plyr and x != desCard:
         x.confirmAlly(plyr, offAskPly, desCard, defAskPly)
 
-    plan = plyr.planning(desCard)							#planning
-    res = drawReveal(plyr,plan[0],desCard,plan[1],choice)	#reveil
+    #planning
+    plan = plyr.planning(desCard)
+
+    #reveal
+    res = drawReveal(plyr,plan[0],desCard,plan[1],choice)
 
     #resolution
     if str(res[0]) != "N" and str(res[1]) != "N":
