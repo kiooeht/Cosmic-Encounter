@@ -90,11 +90,11 @@ def drawReveal(offP,crd1, defP,crd2,pNum):
     cCLen -= 4
 
   print("T: ",end='')
-  if offAttack[3] != "N" and offAttack[3] < 10: print("0",end='')
+  if offAttack[3] != "N" and offAttack[3] < 10 and offAttack[3] >= 0: print("0",end='')
   print(offAttack[3],end='')
-  if offAttack[3] < 100: print(" ",end='')
+  if offAttack[3] != "N" and offAttack[3] < 100 and offAttack[3] >= 0: print(" ",end='')
   print("    T: ",end='')
-  if defAttack[3] != "N" and defAttack[3] < 10: print("0",end='')
+  if defAttack[3] != "N" and defAttack[3] < 10 and defAttack[3] >= 0: print("0",end='')
   print(defAttack[3])
 
   return [offAttack[3], defAttack[3]]
