@@ -149,18 +149,6 @@ def main():
     print("Attacking "+desCard.name+"'s system")
     #launch
     choice = plyr.launch(desCard)
-    #pick planet
-    #desCard.system.draw()
-    #choice = input("Pick a planet number: ")
-    #while not choice.isdigit() or int(choice) > len(desCard.system.planet)-1 or int(choice) < 0:
-      #print("ERROR: YOU SUCK")
-      #choice = input("Pick a planet number: ")
-    ##choose ships
-    #draw()
-    #if mothership[plyr] != 0:
-      #mothership[plyr] += plyr.getShips(0,4-mothership[plyr])
-    #else:
-      #mothership[plyr] += plyr.getShips(1,4)
 
     #alliances
     ##offense
@@ -200,62 +188,7 @@ def main():
     ##others
     for x in players:
       if x != plyr and x != desCard:
-        helping = None
-        offAsked = False
-        defAsked = False
-        for i in offAskPly:
-          if i == x:
-            offAsked = True
-        for i in defAskPly:
-          if i == x:
-            defAsked = True
-        if offAsked or defAsked:
-          while helping == None:
-            print(x.name+">>")
-            if offAsked and defAsked:
-              print("  Both the Offense ("+plyr.name+") and Defense ("+desCard.name+") have asked for your help")
-              accept = input("  Would you like to help the Offense, Defense, Both, or Neither? [o/d/b/n]: ")
-              if accept.lower() == "o":
-                helping = plyr
-              elif accept.lower() == "d":
-                helping = desCard
-              elif accept.lower() == "b":
-                helping = "both"
-            elif offAsked:
-              print("  The Offense ("+plyr.name+") has asked for your help")
-              accept = input("  Would you like to help the Offense? [y/n]: ")
-              if accept.lower() == "y":
-                helping = plyr
-            else:
-              print("  The Defense ("+desCard.name+") has asked for your help")
-              accept = input("  Would you like to help the Defense? [y/n]: ")
-              if accept.lower() == "y":
-                helping = desCard
-            if accept.lower() == "n":
-              print("  Helping no one")
-              break
-
-          if helping != None:
-            helpShips= {}
-            if helping == "both":
-              print("You have chosen to help both the Offense ("+plyr.name+") and Defense ("+desCard.name+")")
-              draw()
-              print("Ships for Offense")
-              mothership[x] = x.getShips(1,4)
-
-              draw()
-              print("Ships for Defense")
-              carriership[x] = x.getShips(1,4)
-            else:
-              print("You have chosen to help the ",end='')
-              if helping == plyr:
-                print("Offense ("+helping.name+")")
-                draw()
-                mothership[x] = x.getShips(1,4)
-              else:
-                print("Defense ("+helping.name+")")
-                draw()
-                carriership[x] = x.getShips(1,4)
+        x.confirmAlly(plyr, offAskPly, desCard, defAskPly)
 
     #planning
     ##offense
