@@ -135,7 +135,10 @@ class player:
     random.seed(time.gmtime())
     for x in range(0, n):
       crd = int(random.random()*len(plyr.hand))
-      self.getCard(plyr.useCard(crd))
+      self.getCard(plyr.giveCompensation(crd))
+
+  def giveCompensation(self, crd):
+    return self.hand.pop(crd)
 
   def colonize(self,plnt,shps):
     plnt.editShips(self,shps)
@@ -396,7 +399,7 @@ class player:
     return num * 1
 
 # Resolution
-  def resolution(self):
+  def resolution(self, res):
     if str(res[0]) != "N" and str(res[1]) != "N":
       if res[0] > res[1]:
         self.offenseWin()
