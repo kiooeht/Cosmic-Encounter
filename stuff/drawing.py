@@ -52,26 +52,32 @@ def drawReveal(offP,crd1, defP,crd2,pNum):
     print(" ",end='')
   print("")
 
-  mC = offAttack[2]
-  cC = defAttack[2]
-  while mC > 0 or cC > 0:
-    if mC >= 4:
+  mC = offAttack[4]
+  cC = defAttack[4]
+  mCLen = 0
+  cCLen = 0
+  for x in mC:
+    mCLen += mC[x]
+  for x in cC:
+    cCLen += cC[x]
+  while mCLen > 0 or cCLen > 0:
+    if mCLen >= 4:
       print(" OOOO",end='')
     else:
       print(" ",end='')
-      for x in range(0,mC):
+      for x in range(0,mCLen):
         print("O",end='')
-      for x in range(mC,4):
+      for x in range(mCLen,4):
         print(" ",end='')
-    mC -= 4
+    mCLen -= 4
     print("      ",end='')
-    if cC >=4:
+    if cCLen >=4:
       print("OOOO")
     else:
-      for x in range(0,cC):
+      for x in range(0,cCLen):
         print("O",end='')
       print("")
-    cC -= 4
+    cCLen -= 4
 
   print("T: ",end='')
   if offAttack[3] != "N" and offAttack[3] < 10: print("0",end='')
