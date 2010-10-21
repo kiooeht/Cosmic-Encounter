@@ -18,14 +18,14 @@ class macron(player):
     offAsked = False
     defAsked = False
     for i in offAskPly:
-      if i == x:
+      if i == self:
         offAsked = True
     for i in defAskPly:
-      if i == x:
+      if i == self:
         defAsked = True
     if offAsked or defAsked:
       while helping == None:
-        print(x.name+">>")
+        print(self.name+">>")
         if offAsked and defAsked:
           print("  Both the Offense ("+offP.name+") and Defense ("+defP.name+") have asked for your help")
           accept = input("  Would you like to help the Offense, Defense, Both, or Neither? [o/d/b/n]: ")
@@ -55,25 +55,25 @@ class macron(player):
           print("You have chosen to help both the Offense ("+offP.name+") and Defense ("+defP.name+")")
           draw()
           print("Ships for Offense")
-          mothership[x] = self.getShips(1,1)
+          mothership[self] = self.getShips(1,1)
 
           draw()
           print("Ships for Defense")
-          carriership[x] = self.getShips(1,1)
+          carriership[self] = self.getShips(1,1)
         else:
           print("You have chosen to help the ",end='')
           if helping == offP:
             print("Offense ("+helping.name+")")
             draw()
-            mothership[x] = self.getShips(1,1)
+            mothership[self] = self.getShips(1,1)
           else:
             print("Defense ("+helping.name+")")
             draw()
-            carriership[x] = self.getShips(1,1)
+            carriership[self] = self.getShips(1,1)
 
   def revealMath(self, aV):
     if aV[0] != "N":
-      aV[3] = aV[0]*4 + aV[1] + aV[2]
+      aV[3] = aV[0] + aV[1]*4 + aV[2]
     else:
       aV[3] = "N"
 
