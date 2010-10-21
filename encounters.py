@@ -4,13 +4,13 @@ import sys
 import random
 import time
 
-from stuff.globals import *
-from stuff.player import *
-from stuff.system import *
-from stuff.planet import *
-from stuff.deck import *
-from stuff.drawing import *
-from stuff.term import oppts
+from imports.globals import *
+from imports.player import *
+from imports.system import *
+from imports.planet import *
+from imports.deck import *
+from imports.drawing import *
+from imports.term import oppts
 from powers import *
 
 oppts(sys.argv[1:])

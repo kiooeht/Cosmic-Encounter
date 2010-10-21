@@ -1,4 +1,4 @@
-from stuff.deck import *
+from imports.deck import *
 
 warp    = {}
 players = []

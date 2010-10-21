@@ -1,4 +1,4 @@
-from stuff.player import *
+from imports.player import *
 
 class virus(player):
   def revealMath(self, aV):
