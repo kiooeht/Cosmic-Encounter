@@ -316,7 +316,6 @@ class player:
             draw()
             carriership[self] = self.getShips(1,4)
 
-
 # Planning
   def planning(self,dest):
     ##offense

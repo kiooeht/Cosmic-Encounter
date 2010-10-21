@@ -171,40 +171,8 @@ def main():
       if x != plyr and x != desCard:
         x.confirmAlly(plyr, offAskPly, desCard, defAskPly)
 
-    plan = plyr.planning(desCard)#planning
-    ###offense
-    #print(plyr.name+">>")
-    ## implement check if only non-encounter cards later
-    #if len(plyr.hand) <= 0:
-      #plyr.drawHand(int(cardspp))
-      #print("Drawing a new hand")
-    #while 1:
-      #plyr.showHand()
-      #selCard = input("Select an encounter card from your hand [0-"+str(len(plyr.hand)-1)+"]: ")
-      #if selCard.isdigit() and int(selCard) <= len(plyr.hand)-1 and int(selCard) >= 0:
-        ## implement check for encounter card later
-        #offCard = plyr.useCard(int(selCard))
-        #break
-      #else:
-        #print("That does not exist in your hand")
-    ###defense
-    #print(desCard.name+">>")
-    ## implement check if only non-encouner cards later
-    #if len(desCard.hand) <= 0:
-      #desCard.drawHand(int(cardspp))
-      #print("Drawing a new hand")
-    #while 1:
-      #desCard.showHand()
-      #selCard = input("Select an encounter card from your hand [0-"+str(len(desCard.hand)-1)+"]: ")
-      #if selCard.isdigit() and int(selCard) <= len(desCard.hand)-1 and int(selCard) >= 0:
-        ## implement check for encounter card later
-        #defCard = desCard.useCard(int(selCard))
-        #break
-      #else:
-        #print("That does not exist in your hand")
-
-    #reveal
-    res = drawReveal(plyr,plan[0],desCard,plan[1],choice)
+    plan = plyr.planning(desCard)							#planning
+    res = drawReveal(plyr,plan[0],desCard,plan[1],choice)	#reveil
 
     #resolution
     if str(res[0]) != "N" and str(res[1]) != "N":
