@@ -352,4 +352,15 @@ class player:
 
 # Resolution
   def resolution(self):
-    print("Resolution")
+    if str(res[0]) != "N" and str(res[1]) != "N":
+      if res[0] > res[1]:
+        self.offenseWin()
+      else:
+        self.defenseWin()
+
+  def winEncounter(self):
+    print("you win")
+
+  def loseEncounter(self):
+    print("you lose")
+
