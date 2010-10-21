@@ -76,7 +76,8 @@ def drawReveal(offP,crd1, defP,crd2,pNum):
   print("T: ",end='')
   if offAttack[3] != "N" and offAttack[3] < 10: print("0",end='')
   print(offAttack[3],end='')
-  print("     T: ",end='')
+  if offAttack[3] < 100: print(" ",end='')
+  print("    T: ",end='')
   if defAttack[3] != "N" and defAttack[3] < 10: print("0",end='')
   print(defAttack[3])
 
