@@ -16,7 +16,10 @@ from powers import *
 oppts(sys.argv[1:])
 
 def newPlayer(n, name, planets, ships, crd):
-  newplayer = antimatter.antimatter(n, name, planets, ships, crd)
+  if n == 0:
+    newplayer = antimatter.antimatter(n, name, planets, ships, crd)
+  else:
+     newplayer = virus.virus(n, name, planets, ships, crd)
   players.append(newplayer)
   warp[newplayer] = 0
   mothership[newplayer] = 0
