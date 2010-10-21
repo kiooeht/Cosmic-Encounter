@@ -319,14 +319,14 @@ class player:
         if x == self:
           attackValue[1] = mothership[x]
         else:
-          aC += mothership[x]
+          aC += x.shipWorth(mothership[x])
       if attackValue[0] != "N":
         attackValue[2] = aC
     else:
       attackValue[1] = self.system.planet[int(pNum)].ships[self]
       aC = 0
       for x in players:
-        aC += carriership[x]
+        aC += x.shipWorth(carriership[x])
       if attackValue[0] != "N":
         attackValue[2] = aC
 
@@ -340,6 +340,9 @@ class player:
       aV[3] = "N"
 
     return aV
+
+  def shipWorth(self, num):
+    return num * 1
 
 # Resolution
   def resolution(self):
