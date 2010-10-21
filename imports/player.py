@@ -14,6 +14,7 @@ class player:
     self.system = system(self, pps, spp)
     self.hand = []
     self.drawHand(crd)
+    self.oppoRevealBool = False
 
   def getShipCount(self):
     n = 0
