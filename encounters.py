@@ -16,7 +16,7 @@ from powers import *
 oppts(sys.argv[1:])
 
 def newPlayer(n, name, planets, ships, crd):
-  newplayer = virus.virus(n, name, planets, ships, crd)
+  newplayer = macron.macron(n, name, planets, ships, crd)
   players.append(newplayer)
   warp[newplayer] = 0
   mothership[newplayer] = 0
