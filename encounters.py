@@ -148,18 +148,19 @@ def main():
         break
     print("Attacking "+desCard.name+"'s system")
     #launch
+    choice = plyr.launch(desCard)
     #pick planet
-    desCard.system.draw()
-    choice = input("Pick a planet number: ")
-    while not choice.isdigit() or int(choice) > len(desCard.system.planet)-1 or int(choice) < 0:
-      print("ERROR: YOU SUCK")
-      choice = input("Pick a planet number: ")
-    #choose ships
-    draw()
-    if mothership[plyr] != 0:
-      mothership[plyr] += plyr.getShips(0,4-mothership[plyr])
-    else:
-      mothership[plyr] += plyr.getShips(1,4)
+    #desCard.system.draw()
+    #choice = input("Pick a planet number: ")
+    #while not choice.isdigit() or int(choice) > len(desCard.system.planet)-1 or int(choice) < 0:
+      #print("ERROR: YOU SUCK")
+      #choice = input("Pick a planet number: ")
+    ##choose ships
+    #draw()
+    #if mothership[plyr] != 0:
+      #mothership[plyr] += plyr.getShips(0,4-mothership[plyr])
+    #else:
+      #mothership[plyr] += plyr.getShips(1,4)
 
     #alliances
     ##offense

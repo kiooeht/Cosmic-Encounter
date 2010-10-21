@@ -2,9 +2,10 @@ import sys
 import random
 import time
 
-from .system import *
-from .planet import *
+from .system  import *
+from .planet  import *
 from .globals import *
+from .drawing import draw
 
 class player:
   def __init__(self, n, ident, pps, spp, crd):
@@ -223,8 +224,19 @@ class player:
     print("Destiny")
 
 # Launch
-  def launch(self):
-    print("Launch")
+  def launch(self,dest):
+    dest.system.draw()
+    choice = input("Pick a planet number: ")
+    while not choice.isdigit() or int(choice) > len(dest.system.planet)-1 or int(choice) < 0:
+      print("ERROR: YOU SUCK")
+      choice = input("Pick a planet number: ")
+    #choose ships
+    draw()
+    if mothership[self] != 0:
+      mothership[self] += self.getShips(0,4-mothership[self])
+    else:
+      mothership[self] += self.getShips(1,4)
+    return choice
 
 # Alliances
   def allyAsk(self):
