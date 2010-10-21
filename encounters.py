@@ -11,7 +11,7 @@ from stuff.planet import *
 from stuff.deck import *
 from stuff.drawing import *
 from stuff.term import oppts
-from powers import virus
+from powers import *
 
 oppts(sys.argv[1:])
 
