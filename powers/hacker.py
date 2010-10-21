@@ -21,5 +21,5 @@ class hacker(player):
         giveCard = self.useCard(int(selCard))
         break
       else:
-        print("That does not exist in your hand"))
+        print("That does not exist in your hand")
     return giveCard
