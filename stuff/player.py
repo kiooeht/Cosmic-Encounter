@@ -247,14 +247,14 @@ class player:
     offAsked = False
     defAsked = False
     for i in offAskPly:
-      if i == x:
+      if i == self:
         offAsked = True
     for i in defAskPly:
-      if i == x:
+      if i == self:
         defAsked = True
     if offAsked or defAsked:
       while helping == None:
-        print(x.name+">>")
+        print(self.name+">>")
         if offAsked and defAsked:
           print("  Both the Offense ("+offP.name+") and Defense ("+defP.name+") have asked for your help")
           accept = input("  Would you like to help the Offense, Defense, Both, or Neither? [o/d/b/n]: ")
@@ -284,21 +284,21 @@ class player:
           print("You have chosen to help both the Offense ("+offP.name+") and Defense ("+defP.name+")")
           draw()
           print("Ships for Offense")
-          mothership[x] = self.getShips(1,4)
+          mothership[self] = self.getShips(1,4)
 
           draw()
           print("Ships for Defense")
-          carriership[x] = self.getShips(1,4)
+          carriership[self] = self.getShips(1,4)
         else:
           print("You have chosen to help the ",end='')
           if helping == offP:
             print("Offense ("+helping.name+")")
             draw()
-            mothership[x] = self.getShips(1,4)
+            mothership[self] = self.getShips(1,4)
           else:
             print("Defense ("+helping.name+")")
             draw()
-            carriership[x] = self.getShips(1,4)
+            carriership[self] = self.getShips(1,4)
 
 
 # Planning
@@ -307,11 +307,18 @@ class player:
 
 # Reveal
   def reveal(self,crd, pNum):
-    attackValue = [0]*4
+    # [0] = card
+    # [1] = number of ships
+    # [2] = total allies
+    # [3] = total power
+    # [4] = hash of individual ally ship numbers
+    attackValue = [0]*5
     if crd == 99:
       attackValue[0] = "N"
     else:
       attackValue[0] = crd
+
+    attackValue[4] = {}
 
     if pNum == -1:
       aC = 0
@@ -320,20 +327,19 @@ class player:
           attackValue[1] = mothership[x]
         else:
           aC += x.shipWorth(mothership[x])
-      if attackValue[0] != "N":
-        attackValue[2] = aC
+          attackValue[4][x] = mothership[x]
+      attackValue[2] = aC
     else:
       attackValue[1] = self.system.planet[int(pNum)].ships[self]
       aC = 0
       for x in players:
         aC += x.shipWorth(carriership[x])
-      if attackValue[0] != "N":
-        attackValue[2] = aC
+        attackValue[4][x] = carriership[x]
+      attackValue[2] = aC
 
     return self.revealMath(attackValue)
 
   def revealMath(self, aV):
-    print("boo")
     if aV[0] != "N":
       aV[3] = aV[0] + aV[1] + aV[2]
     else:
