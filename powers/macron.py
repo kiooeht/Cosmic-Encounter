@@ -78,3 +78,6 @@ class macron(player):
       aV[3] = "N"
 
     return aV
+
+  def shipWorth(self, num):
+    return num * 4
