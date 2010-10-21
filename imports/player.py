@@ -318,8 +318,38 @@ class player:
 
 
 # Planning
-  def planning(self):
-    print("Planning")
+  def planning(self,dest):
+    ##offense
+    print(self.name+">>")
+    # implement check if only non-encounter cards later
+    if len(self.hand) <= 0:
+      self.drawHand(int(cardspp))
+      print("Drawing a new hand")
+    while 1:
+      self.showHand()
+      selCard = input("Select an encounter card from your hand [0-"+str(len(self.hand)-1)+"]: ")
+      if selCard.isdigit() and int(selCard) <= len(self.hand)-1 and int(selCard) >= 0:
+        # implement check for encounter card later
+        offCard = self.useCard(int(selCard))
+        break
+      else:
+        print("That does not exist in your hand")
+    ##defense
+    print(dest.name+">>")
+    # implement check if only non-encouner cards later
+    if len(dest.hand) <= 0:
+      dest.drawHand(int(cardspp))
+      print("Drawing a new hand")
+    while 1:
+      dest.showHand()
+      selCard = input("Select an encounter card from your hand [0-"+str(len(dest.hand)-1)+"]: ")
+      if selCard.isdigit() and int(selCard) <= len(dest.hand)-1 and int(selCard) >= 0:
+        # implement check for encounter card later
+        defCard = dest.useCard(int(selCard))
+        break
+      else:
+        print("That does not exist in your hand")
+    return [offCard,defCard]
 
 # Reveal
   def reveal(self,crd, pNum):
