@@ -4,14 +4,15 @@ from imports.globals import players
 
 class hacker(player):
   def getCompensation(self,plyr,n):
+    print(self.name+">>")
     printStats()
-    plyr = input("Who would you like to take compensation from? (number): ")
-    plyr = players[int(plyr)]
+    plyrNum = input("Who would you like to take compensation from? (number): ")
+    plyr = players[int(plyrNum)]
     for x in range(0, n):
       plyr.showHand()
-      print("You can take "+ (n-x) +" more cards")
+      print("You can take "+ str(n-x) +" more cards")
       crd = input("Select card to take [0-"+str(len(plyr.hand)-1)+"]: ")
-      self.getCard(plyr.giveCompensation(crd))
+      self.getCard(plyr.giveCompensation(int(crd)))
 
   def giveCompensation(self, crd):
     while 1:
