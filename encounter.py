@@ -282,21 +282,3 @@ def main():
   destiny.printDeck()
 
 main()
-
-'''
-Things to implement
-Not-stupid users
-Game play
-Artifacts
-Powers
-
-TURN PHASES:
-1. start turn
-2. regroup
-3.  destiny
-4. attack desisions
-5. alliances
-6. planning (card choice, power options, etc.)
-7. reveal
-8. outcome
-'''
