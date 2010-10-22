@@ -130,9 +130,12 @@ def main():
     print("Starting player turn:",plyr.name)
     prompt = plyr.name + ">> "
 
-    plyr.regroup()          #regroup
-    desCard = plyr.destiny(destiny) #destiny
-    choice = plyr.launch(desCard) #launch
+    #regroup
+    plyr.regroup()
+    #destiny
+    desCard = plyr.destiny(destiny)
+    #launch
+    choice = plyr.launch(desCard)
 
     #alliances
     offAskPly = plyr.allyAsk(desCard)
