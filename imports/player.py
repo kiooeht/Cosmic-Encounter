@@ -9,10 +9,10 @@ from .drawing import draw
 
 class player:
   def __init__(self, n, ident, pps, spp, crd):
-    self.num  = n
+    self.num    = n
     self.name   = ident
     self.system = system(self, pps, spp)
-    self.hand = []
+    self.hand   = []
     self.drawHand(crd)
     self.oppoRevealBool = False
 
@@ -259,8 +259,23 @@ class player:
     return choice
 
 # Alliances
-  def allyAsk(self):
-    print("Asking for Allies")
+  def allyAsk(self,oppent):
+    allies = []
+    if len(players) - 2 > 0:
+      askHelp = input(self.name+", Would you like to ask for allies? [Y/n]: ")
+      if askHelp.lower() != "n":
+        for x in players:
+          if x != self and x != oppent:
+            plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
+            while plyHelp.lower() != "y" and plyHelp.lower() != "n":
+              print("Excuse me, sir/madam, but it appears that you have neglected to specify")
+              print("correctly a positive or negative response to my question. If you would")
+              print("be so gracious, would you please try again and don't mess up this time.")
+              print("Thank you.")
+              plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
+            if plyHelp.lower() == "y":
+              allies.append(x)
+    return allies
 
   def confirmAlly(self, offP, offAskPly, defP, defAskPly):
     helping = None

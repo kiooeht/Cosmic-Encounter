@@ -135,41 +135,8 @@ def main():
     choice = plyr.launch(desCard) #launch
 
     #alliances
-    ##offense
-    offAskPly = []
-    if len(players) - 2 > 0:
-      print("Offense")
-      askHelp = input("Would you like to ask for allies? [Y/n]: ")
-      if askHelp.lower() != "n":
-        for x in players:
-          if x != plyr and x != desCard:
-            plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
-            while plyHelp.lower() != "y" and plyHelp.lower() != "n":
-              print("Excuse me, sir/madam, but it appears that you have neglected to specify")
-              print("correctly a positive or negative response to my question. If you would")
-              print("be so gracious, would you please try again and don't mess up this time.")
-              print("Thank you.")
-              plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
-            if plyHelp.lower() == "y":
-              offAskPly.append(x)
-    ##defense
-    defAskPly = []
-    if len(players) - 2 > 0:
-      print("Defense")
-      askHelp = input("Would you like to ask for allies? [Y/n]: ")
-      if askHelp.lower() != "n":
-        for x in players:
-          if x != plyr and x != desCard:
-            plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
-            while plyHelp.lower() != "y" and plyHelp.lower() != "n":
-              print("Excuse me, sir/madam, but it appears that you have neglected to specify")
-              print("correctly a positive or negative response to my question. If you would")
-              print("be so gracious, would you please try again and don't mess up this time.")
-              print("Thank you.")
-              plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
-            if plyHelp.lower() == "y":
-              defAskPly.append(x)
-    ##others
+    offAskPly = plyr.allyAsk(desCard)
+    defAskPly = desCard.allyAsk(plyr)
     for x in players:
       if x != plyr and x != desCard:
         x.confirmAlly(plyr, offAskPly, desCard, defAskPly)
