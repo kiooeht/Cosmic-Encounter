@@ -59,9 +59,9 @@ def main():
       else: shipspp = "4"
     if shipspp == "": shipspp = "4"
     cardspp = input("Initial hand size (1-20) [7]: ")
-    while not cardspp.isdigit() or int(cardspp) > 10 or int(cardspp) < 1:
+    while not cardspp.isdigit() or int(cardspp) > 20 or int(cardspp) < 1:
       if cardspp != "":
-        print("USER ERROR: That is not an integer between 1 and 10")
+        print("USER ERROR: That is not an integer between 1 and 20")
         cardspp = input("Initial hand size (1-20) [7]: ")
       else: cardspp = "7"
     if cardspp == "": cardspp = "7"
@@ -106,9 +106,9 @@ def main():
         else: shipspp = "4"
       if shipspp == "": shipspp = "4"
       cardspp = input("Initial hand size (1-20) [7]: ")
-      while not cardspp.isdigit() or int(cardspp) > 10 or int(cardspp) < 1:
+      while not cardspp.isdigit() or int(cardspp) > 20 or int(cardspp) < 1:
         if cardspp != "":
-          print("USER ERROR: That is not an integer between 1 and 10")
+          print("USER ERROR: That is not an integer between 1 and 20")
           cardspp = input("Initial hand size (1-20) [7]: ")
         else: cardspp = "7"
       if cardspp == "": cardspp = "7"
