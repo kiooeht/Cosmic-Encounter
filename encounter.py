@@ -182,7 +182,7 @@ def main():
         for x in players:
           x.killShips(carriership[x], carriership, x)
         ## kill defense ships
-        x.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
+        desCard.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
         ## colonize
         plyr.colonize(desCard.system.planet[int(choice)], mothership[plyr])
         mothership[plyr] = 0
@@ -213,7 +213,7 @@ def main():
         for x in players:
           x.killShips(carriership[x], carriership, x)
         ## kill defense ships
-        x.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
+        desCard.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
         ## colonize
         plyr.colonize(desCard.system.planet[int(choice)], mothership[plyr])
         mothership[plyr] = 0
