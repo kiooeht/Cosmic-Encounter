@@ -7,8 +7,10 @@ It is written in Python 3.1.2 and in it's current state it is just command line 
 Currently working powers are:<br>
 Hacker<br>
 Macron<br>
+Masochist<br>
 Virus<br>
-Warpish
+Warpish<br>
+Zombie
 
 Currently in the works are:<br>
 Antimatter
