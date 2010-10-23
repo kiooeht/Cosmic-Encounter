@@ -41,7 +41,7 @@ class deck:
       if self.discard[len(self.discard)-1] == 99:
         sys.stdout.write("N ")
       else:
-        if type(self.discard[len(self.discard)-1]).__name__ == 'player':
+        if type(self.discard[len(self.discard)-1]).__name__ != "int":
           if self.discard[len(self.discard)-1].num <= 9:
             sys.stdout.write("0")
           sys.stdout.write(str(self.discard[len(self.discard)-1].num))
