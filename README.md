@@ -4,11 +4,11 @@ This program is an attempt to recreate the board game "<a href="http://en.wikipe
 It is written in Python 3.1.2 and in it's current state it is just command line based.
 
 <h3>Powers</h3>
-Currently working powers are:
-Hacker
-Macron
-Virus
+Currently working powers are:<br>
+Hacker<br>
+Macron<br>
+Virus<br>
 Warpish
 
-Currently in the works are:
+Currently in the works are:<br>
 Antimatter
