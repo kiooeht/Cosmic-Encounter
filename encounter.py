@@ -243,7 +243,7 @@ def main():
     #end turn
     # If any players have 5 colonies, they win
     for x in players:
-      if x.getColonies() >= 5:
+      if x.checkWin():
         winner = x
         gameover = True
 

@@ -433,3 +433,9 @@ class player:
   def loseEncounter(self):
     print("you lose")
 
+# Ending
+  def checkWin(self):
+    if seld.getColonies() >= 5:
+      return True
+    else:
+      return False
