@@ -1,5 +1,64 @@
 Move all turn phases into the player class
+--Resolution
 
 Add Powers
+--Amoeba
+--Anti-Matter
+--Barbarian
+--Calculator
+--Chosen
+--Citadel
+--Clone
+--Cudgel
+--Dictator
+--Fido
+--Filch
+--Fodder
+--Gambler
+--Grudge
+X--Hacker
+--Hate
+--Healer
+--Human
+--Kamikaze
+--Loser
+--Machine
+X--Macron
+--Masochist
+--Mind
+--Mirror
+--Miser
+--Mite
+--Mutant
+--Observer
+--Oracle
+--Pacifist
+--Parasite
+--Philanthropist
+--Reincarnator
+--Remora
+--Reserve
+--Shadow
+--Sorcerer
+--Spiff
+--Tick-Tock
+--Trader
+--Tripler
+--Vacuum
+X--Virus
+--Void
+--Vulch
+X--Warpish
+--Warrior
+--Will
+--Zombie
 
 Implement Artifacts
+--Card Zap
+--Cosmic Zap
+--Emotion Control
+--Force Field
+--Ionic Gas
+--Mobius Tubes
+--Plague
+--Quash
