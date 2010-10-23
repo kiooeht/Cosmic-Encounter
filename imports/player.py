@@ -206,6 +206,11 @@ class player:
           else:           print("That system does not exist")
         else:             print("Wrong number of arguments")
 
+  def killShips(self, num, loc, locN):
+    warp[self] += num
+    loc[locN] -= num
+
+
 
 ################################################################################
 ########## - GAME LOOP FUNCTIONS - #############################################
