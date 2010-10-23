@@ -181,6 +181,7 @@ class player:
 
   def placeShips(self,n):
     while n > 0:
+      print(str(n)+" ships left to place")
       choice  = input("System, Planet, and Number of Ships (space deliminated): ")
       lst   = choice.split(" ")
       yay   = 1
