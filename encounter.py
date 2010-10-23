@@ -157,11 +157,9 @@ def main():
         print("yay")
         ## kill defense allies
         for x in players:
-          warp[x] += carriership[x]
-          carriership[x] = 0
+          x.killShips(carriership[x], carriership, x)
         ## kill defense ships
-        warp[desCard] = desCard.system.planet[int(choice)].ships[desCard]
-        desCard.system.planet[int(choice)].ships[desCard] = 0
+        x.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
         ## colonize
         plyr.colonize(desCard.system.planet[int(choice)], mothership[plyr])
         mothership[plyr] = 0
@@ -174,8 +172,7 @@ def main():
         print("nay")
         ## kill offense ships/allies
         for x in players:
-          warp[x] += mothership[x]
-          mothership[x] = 0
+          x.killShips(mothership[x], mothership, x)
         ## return defense allies
         for x in players:
           ## defendor reward
@@ -191,11 +188,9 @@ def main():
         desCard.getCompensation(plyr, desCard.system.planet[int(choice)].ships[desCard])
         ## kill defense allies
         for x in players:
-          warp[x] += carriership[x]
-          carriership[x] = 0
+          x.killShips(carriership[x], carriership, x)
         ## kill defense ships
-        warp[desCard] = desCard.system.planet[int(choice)].ships[desCard]
-        desCard.system.planet[int(choice)].ships[desCard] = 0
+        x.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
         ## colonize
         plyr.colonize(desCard.system.planet[int(choice)], mothership[plyr])
         mothership[plyr] = 0
@@ -210,8 +205,7 @@ def main():
         plyr.getCompensation(desCard, mothership[plyr])
         ## kill offense ships
         for x in players:
-          warp[x] += mothership[x]
-          mothership[x] = 0
+          x.killShips(mothership[x], mothership, x)
         ## return defense allies
         for x in players:
           ## defendor reward
