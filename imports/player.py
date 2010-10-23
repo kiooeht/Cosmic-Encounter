@@ -435,7 +435,7 @@ class player:
 
 # Ending
   def checkWin(self):
-    if seld.getColonies() >= 5:
+    if self.getColonies() >= 5:
       return True
     else:
       return False
