@@ -1,1 +1,1 @@
-__all__ = ["antimatter", "hacker", "macron", "masochist", "virus", "warpish"]
+__all__ = ["antimatter", "hacker", "macron", "masochist", "virus", "warpish", "zombie"]
