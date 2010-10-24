@@ -8,6 +8,7 @@ Currently working powers are:<br>
 Hacker<br>
 Macron<br>
 Masochist<br>
+Mite<br>
 Virus<br>
 Warpish<br>
 Zombie
