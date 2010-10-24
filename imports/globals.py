@@ -24,6 +24,7 @@ eCards = [0,              \
           99,99,99,99,99, \
           99,99,99,99,99]
           # 99 = N
+          # 90 - 98 Reserved for Artifacts
 cards   = deck(eCards)
 destiny = deck()
 numplyrs = 0
