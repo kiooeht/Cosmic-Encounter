@@ -232,6 +232,12 @@ class player:
       self.encounterNumber = 1
       return False
 
+  def hasEncounterCards(self):
+    for x in range(0, len(self.hand)):
+      if x < 90:
+        return True
+    return False
+
 
 
 ################################################################################
