@@ -148,7 +148,9 @@ def main():
     # Empty mothership (just in case)
     for x in players:
       mothership[x] = 0
-    print("Starting player turn:",plyr.name)
+    if plyr.encounterNumber == 1:
+      print("Starting player turn:",plyr.name)
+    print("Starting new encounter")
     prompt = plyr.name + ">> "
 
     #regroup
@@ -188,11 +190,13 @@ def main():
     #reveal
     res = drawReveal(plyr,plan[0],desCard,plan[1],choice)
 
+    successful = True
     #resolution
     if str(res[0]) != "N" and str(res[1]) != "N":
       ## offense win
       if res[0] > res[1]:
         print("yay")
+        successful = True
         ## kill defense allies
         for x in players:
           x.killShips(carriership[x], carriership, x)
@@ -208,6 +212,7 @@ def main():
       ## defense win
       else:
         print("nay")
+        successful = False
         ## kill offense ships/allies
         for x in players:
           x.killShips(mothership[x], mothership, x)
@@ -222,6 +227,7 @@ def main():
       ## offense win
       if str(res[1]) == "N":
         print("yay")
+        successful = True
         ## compensate
         desCard.getCompensation(plyr, desCard.system.planet[int(choice)].ships[desCard])
         ## kill defense allies
@@ -239,6 +245,7 @@ def main():
       ## defense win
       else:
         print("nay")
+        successful = False
         ## compensate
         plyr.getCompensation(desCard, mothership[plyr])
         ## kill offense ships
@@ -262,10 +269,11 @@ def main():
         winner = x
         gameover = True
 
-    # Increase player index
-    plyrix += 1
-    # Set player index back to 0 if greater than number of players
-    if plyrix >= len(players): plyrix = 0
+    if not plyr.goAgain(successful):
+      # Increase player index
+      plyrix += 1
+      # Set player index back to 0 if greater than number of players
+      if plyrix >= len(players): plyrix = 0
 
     done = input("Is your name Amanda?: ")
     if done.lower() == "y": gameover = True

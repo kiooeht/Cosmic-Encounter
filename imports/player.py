@@ -14,6 +14,7 @@ class player:
     self.system = system(self, pps, spp)
     self.hand   = []
     self.drawHand(crd)
+    self.encounterNumber = 1
     self.oppoRevealBool = False
 
   def getShipCount(self):
@@ -133,8 +134,8 @@ class player:
     self.hand.append(crd)
 
   def getCompensation(self,plyr,n):
-    random.seed(time.gmtime())
     for x in range(0, n):
+      random.seed(time.gmtime())
       crd = int(random.random()*len(plyr.hand))
       self.getCard(plyr.giveCompensation(crd))
 
@@ -210,6 +211,22 @@ class player:
   def killShips(self, num, loc, locN):
     warp[self] += num
     loc[locN] -= num
+
+  def goAgain(self, success):
+    if success and self.encounterNumber < 2:
+      while 1:
+        again = input("Would you like to have another encounter? [Y/n]: ")
+        if again.lower() == "y" or again.lower() == "":
+          self.encounterNumber += 1
+          return True
+        elif again.lower() == "n":
+          self.encounterNumber = 1
+          return False
+        else:
+          print("ERROR: Try again")
+    else:
+      self.encounterNumber = 1
+      return False
 
 
 
@@ -424,9 +441,14 @@ class player:
   def resolution(self, res):
     if str(res[0]) != "N" and str(res[1]) != "N":
       if res[0] > res[1]:
-        self.offenseWin()
+        self.winEncounter()
       else:
-        self.defenseWin()
+        self.loseEncounter()
+    else:
+      if str(res[1]) == "N":
+        print("yay")
+      elif str(res[0]) == "N":
+        print("yay")
 
   def winEncounter(self):
     print("you win")
