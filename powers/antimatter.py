@@ -2,11 +2,7 @@ from imports.player import *
 
 class antimatter(player):
   def __init__(self, n, ident, pps, spp, crd):
-    self.num  = n
-    self.name   = ident
-    self.system = system(self, pps, spp)
-    self.hand = []
-    self.drawHand(crd)
+    super().__init__(n, ident, pps, spp, crd)
     self.oppoRevealBool = True
 
   def revealMath(self, aV):
