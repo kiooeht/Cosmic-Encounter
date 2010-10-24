@@ -134,10 +134,14 @@ class player:
     self.hand.append(crd)
 
   def getCompensation(self,plyr,n):
-    for x in range(0, n):
-      random.seed(time.gmtime())
-      crd = int(random.random()*len(plyr.hand))
-      self.getCard(plyr.giveCompensation(crd))
+    if len(plyr.hand) <= n:
+      for x in range(0, len(plyr.hand)):
+        self.getCard(plyr.giveCompensation(x))
+    else:
+      for x in range(0, n):
+        random.seed(time.gmtime())
+        crd = int(random.random()*len(plyr.hand))
+        self.getCard(plyr.giveCompensation(crd))
 
   def giveCompensation(self, crd):
     return self.hand.pop(crd)
