@@ -10,7 +10,7 @@ class mite(player):
 
     if len(dest.hand) > 3:
       while 1:
-        miteChoice = input(dest.name+">> Discard down to 3 cards or give Mite a colony? [3/c]:")
+        miteChoice = input(dest.name+">> Discard down to 3 cards or give Mite a colony? [3/c]: ")
         if miteChoice == "3":
           for x in range(0, len(dest.hand)-3):
             random.seed(time.gmtime())
