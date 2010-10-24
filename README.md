@@ -6,6 +6,7 @@ It is written in Python 3.1.2 and in it's current state it is just command line 
 <h3>Powers</h3>
 Currently working powers are:<br>
 Hacker<br>
+Machine<br>
 Macron<br>
 Masochist<br>
 Mite<br>
