@@ -48,11 +48,12 @@ class antimatter(player):
         attackValue[4][x] = carriership[x]
       attackValue[2] = aC
 
-    return self.oppoRevealMath(attackValue)
+    return self.oppoRevealMath(oppo, attackValue)
 
-  def oppoRevealMath(self, aV):
+  def oppoRevealMath(self, oppo, aV):
+    aV = oppo.revealMath(aV)
     if aV[0] != "N":
-      aV[3] = aV[0] + aV[1] - aV[2]
+      aV[3] -= 2 * aV[2]
     else:
       aV[3] = "N"
 
