@@ -158,6 +158,21 @@ def main():
     #launch
     choice = plyr.launch(desCard)
 
+    if choice == "successful":
+      # If any players have 5 colonies, they win
+      for x in players:
+        if x.checkWin():
+          winner = x
+          gameover = True
+      # Increase player index
+      plyrix += 1
+      # Set player index back to 0 if greater than number of players
+      if plyrix >= len(players): plyrix = 0
+      done = input("Is your name Amanda?: ")
+      if done.lower() == "y": gameover = True
+      # Go to next turn
+      continue
+
     #alliances
     # Offense and defense ask for allies
     offAskPly = plyr.allyAsk(desCard)
