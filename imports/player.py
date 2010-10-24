@@ -239,12 +239,12 @@ class player:
 
   def hasEncounterCards(self):
     for x in self.hand:
-      if x < 90:
+      if x < 90 or x == 99:
         return True
     return False
 
   def isEncounterCard(self, crd):
-    return self.hand[crd] < 90
+    return self.hand[crd] < 90 or self.hand[crd] == 99
 
 
 
@@ -393,7 +393,7 @@ class player:
       selCard = input("Select an encounter card from your hand [0-"+str(len(self.hand)-1)+"]: ")
       if selCard.isdigit() and int(selCard) <= len(self.hand)-1 and int(selCard) >= 0:
         # check if card is encounter card
-        if isEncounterCard(int(selCard)):
+        if self.isEncounterCard(int(selCard)):
           offCard = self.useCard(int(selCard))
           break
         else:
@@ -406,16 +406,16 @@ class player:
       dest.drawHand(self.initialHand)
       print("Drawing a new hand")
     # check if player has an encounter card
-    if not self.hasEncounterCards():
-      self.discardHand()
-      self.drawHand(self.initialHand)
+    if not dest.hasEncounterCards():
+      dest.discardHand()
+      dest.drawHand(self.initialHand)
       print("No encounter cards left, drawing a new hand")
     while 1:
       dest.showHand()
       selCard = input("Select an encounter card from your hand [0-"+str(len(dest.hand)-1)+"]: ")
       if selCard.isdigit() and int(selCard) <= len(dest.hand)-1 and int(selCard) >= 0:
         # check if card is encounter card
-        if isEncounterCard(int(selCard)):
+        if dest.isEncounterCard(int(selCard)):
           defCard = dest.useCard(int(selCard))
           break
         else:
