@@ -4,6 +4,7 @@ import sys
 import random
 import time
 
+sys.path.append("./powers")
 from imports.globals import *
 from imports.player import *
 from imports.system import *
@@ -11,32 +12,23 @@ from imports.planet import *
 from imports.deck import *
 from imports.drawing import *
 from imports.term import oppts
-from powers import *
+import powers
+
+# Create list of all power modules
+listPowers = {}
+for x in powers.__all__:
+  listPowers[x] = __import__(x, globals(), locals(), [], 0)
 
 # Call terminal switches check
 oppts(sys.argv[1:])
 
-# List of all the power classes, unfortunately it doesn't work when put in globals.py =(
-powersList = [antimatter.antimatter,
-              clone.clone,
-              hacker.hacker,
-              machine.machine,
-              macron.macron,
-              masochist.masochist,
-              mite.mite,
-              trader.trader,
-              tripler.tripler,
-              virus.virus,
-              warpish.warpish,
-              zombie.zombie]
-
 # Create player at the same time adding them to all appropriate global lists
 # (players, warp, mothership, carriership, destiny)
 def newPlayer(n, name, planets, ships, crd):
-  if n == 0:
-    newplayer = powersList[0](n, name, planets, ships, crd)
-  else:
-     newplayer = powersList[9](n, name, planets, ships, crd)
+  #if n == 0:
+  newplayer = getattr(listPowers["mite"], "mite")(n, name, planets, ships, crd)
+  #else:
+  #   newplayer = powersList[9](n, name, planets, ships, crd)
   players.append(newplayer)
   warp[newplayer] = 0
   mothership[newplayer] = 0
