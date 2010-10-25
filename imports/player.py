@@ -388,6 +388,10 @@ class player:
       self.discardHand()
       self.drawHand(self.initialHand)
       print("No encounter cards left, drawing a new hand")
+    # Do any power stuff that should be before chosing cards
+    self.beforeCardsChosen(dest)
+    dest.beforeCardsChosen(self)
+    print(self.name+">>")
     while 1:
       self.showHand()
       selCard = input("Select an encounter card from your hand [0-"+str(len(self.hand)-1)+"]: ")
@@ -423,6 +427,10 @@ class player:
       else:
         print("That does not exist in your hand")
     return [offCard,defCard]
+
+  def beforeCardsChosen(self, oppo):
+    # Do nothing
+    return 0
 
 # Reveal
   def reveal(self,crd, pNum):
