@@ -384,7 +384,7 @@ class player:
       self.drawHand(self.initialHand)
       print("Drawing a new hand")
     # check if player has an encounter card
-    if not self.hasEncounterCards():
+    while not self.hasEncounterCards():
       self.discardHand()
       self.drawHand(self.initialHand)
       print("No encounter cards left, drawing a new hand")
