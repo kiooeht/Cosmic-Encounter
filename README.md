@@ -10,6 +10,8 @@ Machine<br>
 Macron<br>
 Masochist<br>
 Mite<br>
+Trader<br>
+Tripler<br>
 Virus<br>
 Warpish<br>
 Zombie
