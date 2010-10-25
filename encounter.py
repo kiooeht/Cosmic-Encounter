@@ -16,13 +16,27 @@ from powers import *
 # Call terminal switches check
 oppts(sys.argv[1:])
 
+# List of all the power classes, unfortunately it doesn't work when put in globals.py =(
+powersList = [antimatter.antimatter,
+              clone.clone,
+              hacker.hacker,
+              machine.machine,
+              macron.macron,
+              masochist.masochist,
+              mite.mite,
+              trader.trader,
+              tripler.tripler,
+              virus.virus,
+              warpish.warpish,
+              zombie.zombie]
+
 # Create player at the same time adding them to all appropriate global lists
 # (players, warp, mothership, carriership, destiny)
 def newPlayer(n, name, planets, ships, crd):
   if n == 0:
-    newplayer = antimatter.antimatter(n, name, planets, ships, crd)
+    newplayer = powersList[0](n, name, planets, ships, crd)
   else:
-     newplayer = virus.virus(n, name, planets, ships, crd)
+     newplayer = powersList[9](n, name, planets, ships, crd)
   players.append(newplayer)
   warp[newplayer] = 0
   mothership[newplayer] = 0
