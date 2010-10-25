@@ -478,23 +478,80 @@ class player:
     return num * 1
 
 # Resolution
-  def resolution(self, res):
+  def resolution(self, oppo, res, plan, choice):
     if str(res[0]) != "N" and str(res[1]) != "N":
       if res[0] > res[1]:
-        self.winEncounter()
+        successful = True
+        self.winEncounter(self, oppo, choice)
       else:
-        self.loseEncounter()
+        successful = False
+        self.loseEncounter(self, oppo, choice)
     else:
       if str(res[1]) == "N":
-        print("yay")
+        successful = True
+        self.winCompensate(self, oppo, choice)
       elif str(res[0]) == "N":
-        print("yay")
+        successful = False
+        self.loseCompensate(self, oppo, choice)
+    return successful
 
-  def winEncounter(self):
+  def winEncounter(self, off, dest, choice):
     print("you win")
+    ## kill defense allies
+    for x in players:
+      x.killShips(carriership[x], carriership, x)
+    ## kill defense ships
+    dest.killShips(dest.system.planet[int(choice)].ships[dest], dest.system.planet[int(choice)].ships, dest)
+    ## colonize
+    off.colonize(dest.system.planet[int(choice)], mothership[off])
+    mothership[off] = 0
+    ## return offense allies
+    for x in players:
+      x.placeShips(mothership[x])
+      mothership[x] = 0
 
-  def loseEncounter(self):
+  def loseEncounter(self, off, dest, choice):
     print("you lose")
+    ## kill offense ships/allies
+    for x in players:
+      x.killShips(mothership[x], mothership, x)
+    ## return defense allies
+    for x in players:
+      ## defender reward
+      if carriership[x] > 0:
+        x.drawCards(carriership[x])
+      x.placeShips(carriership[x])
+      carriership[x] = 0
+
+  def winCompensate(self, off, dest, choice):
+    ## compensate
+    dest.getCompensation(off, dest.system.planet[int(choice)].ships[dest])
+    ## kill defense allies
+    for x in players:
+      x.killShips(carriership[x], carriership, x)
+    ## kill defense ships
+    dest.killShips(dest.system.planet[int(choice)].ships[dest], dest.system.planet[int(choice)].ships, dest)
+    ## colonize
+    off.colonize(dest.system.planet[int(choice)], mothership[off])
+    mothership[off] = 0
+    ## return offense allies
+    for x in players:
+      x.placeShips(mothership[x])
+      mothership[x] = 0
+
+  def loseCompensate(self, off, dest, choice):
+    ## compensate
+    off.getCompensation(dest, mothership[off])
+    ## kill offense ships
+    for x in players:
+      x.killShips(mothership[x], mothership, x)
+    ## return defense allies
+    for x in players:
+      ## defendor reward
+      if carriership[x] > 0:
+        x.drawCards(carriership[x])
+      x.placeShips(carriership[x])
+      carriership[x] = 0
 
 # Ending
   def checkWin(self):

@@ -190,74 +190,8 @@ def main():
     #reveal
     res = drawReveal(plyr,plan[0],desCard,plan[1],choice)
 
-    successful = True
     #resolution
-    if str(res[0]) != "N" and str(res[1]) != "N":
-      ## offense win
-      if res[0] > res[1]:
-        print("yay")
-        successful = True
-        ## kill defense allies
-        for x in players:
-          x.killShips(carriership[x], carriership, x)
-        ## kill defense ships
-        desCard.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
-        ## colonize
-        plyr.colonize(desCard.system.planet[int(choice)], mothership[plyr])
-        mothership[plyr] = 0
-        ## return offense allies
-        for x in players:
-          x.placeShips(mothership[x])
-          mothership[x] = 0
-      ## defense win
-      else:
-        print("nay")
-        successful = False
-        ## kill offense ships/allies
-        for x in players:
-          x.killShips(mothership[x], mothership, x)
-        ## return defense allies
-        for x in players:
-          ## defendor reward
-          if carriership[x] > 0:
-            x.drawCards(carriership[x])
-          x.placeShips(carriership[x])
-          carriership[x] = 0
-    else:
-      ## offense win
-      if str(res[1]) == "N":
-        print("yay")
-        successful = True
-        ## compensate
-        desCard.getCompensation(plyr, desCard.system.planet[int(choice)].ships[desCard])
-        ## kill defense allies
-        for x in players:
-          x.killShips(carriership[x], carriership, x)
-        ## kill defense ships
-        desCard.killShips(desCard.system.planet[int(choice)].ships[desCard], desCard.system.planet[int(choice)].ships, desCard)
-        ## colonize
-        plyr.colonize(desCard.system.planet[int(choice)], mothership[plyr])
-        mothership[plyr] = 0
-        ## return offense allies
-        for x in players:
-          x.placeShips(mothership[x])
-          mothership[x] = 0
-      ## defense win
-      else:
-        print("nay")
-        successful = False
-        ## compensate
-        plyr.getCompensation(desCard, mothership[plyr])
-        ## kill offense ships
-        for x in players:
-          x.killShips(mothership[x], mothership, x)
-        ## return defense allies
-        for x in players:
-          ## defendor reward
-          if carriership[x] > 0:
-            x.drawCards(carriership[x])
-          x.placeShips(carriership[x])
-          carriership[x] = 0
+    successful = plyr.resolution(desCard, res, plan, choice)
 
     cards.discardCard(plan[0])
     cards.discardCard(plan[1])
