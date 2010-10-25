@@ -193,9 +193,6 @@ def main():
     #resolution
     successful = plyr.resolution(desCard, res, plan, choice)
 
-    cards.discardCard(plan[0])
-    cards.discardCard(plan[1])
-
     #end turn
     # If any players have 5 colonies, they win
     for x in players:

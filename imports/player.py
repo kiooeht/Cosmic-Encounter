@@ -128,6 +128,9 @@ class player:
   def discardCard(self,crd):
     cards.discardCard(self.hand.pop(crd))
 
+  def discardECard(self,crd):
+    cards
+
   def discardHand(self):
     for x in range(0, len(self.hand)):
       discardCard(x)
@@ -493,7 +496,12 @@ class player:
       elif str(res[0]) == "N":
         successful = False
         self.loseCompensate(self, oppo, choice)
+    self.discardUsedECard(plan[0])
+    oppo.discardUsedECard(plan[1])
     return successful
+
+  def discardUsedECard(self, crd):
+    cards.discardCard(crd)
 
   def winEncounter(self, off, dest, choice):
     print("you win")
