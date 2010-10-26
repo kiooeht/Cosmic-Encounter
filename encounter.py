@@ -181,6 +181,8 @@ def main():
       # Go to next turn
       continue
 
+    desCard = choice[1]
+
     #alliances
     # Offense and defense ask for allies
     offAskPly = plyr.allyAsk(desCard)

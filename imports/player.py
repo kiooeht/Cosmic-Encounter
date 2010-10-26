@@ -294,13 +294,38 @@ class player:
     while not choice.isdigit() or int(choice) > len(dest.system.planet)-1 or int(choice) < 0:
       print("ERROR: YOU SUCK")
       choice = input("Pick a planet number: ")
-    #choose ships
+
+    colony = dest
+    if dest == self:
+      # check if planet is empty
+      empty = True
+      for x in self.system.planet[int(choice)].ships:
+        if x != 0:
+          empty = False
+          break
+      if empty: return "successful"
+
+      # choose colony to attack
+      while 1:
+        colonyNum = input("Pick a player to attack on that planet (number [0-"+str(len(players)-1)+"]): ")
+        if colonyNum.isdigit() and int(colonyNum) < len(players) and int(colonyNum) >= 0:
+          if players[int(colonyNum)] == self:
+            print("You can't attack your own colony!")
+          elif players[int(colonyNum)] not in self.system.planet[int(choice)].ships:
+            print("That player does not have a colony there!")
+          elif self.system.planet[int(choice)].ships[players[int(colonyNum)]] == 0:
+            print("That player does not have a colony there!")
+          else:
+            colony = players[int(colonyNum)]
+            break
+
+    # choose ships
     draw()
     if mothership[self] != 0:
       mothership[self] += self.getShips(0,4-mothership[self])
     else:
       mothership[self] += self.getShips(1,4)
-    return choice
+    return [choice, colony]
 
 # Alliances
   def allyAsk(self,oppent):
@@ -460,7 +485,7 @@ class player:
           attackValue[4][x] = mothership[x]
       attackValue[2] = aC
     else:
-      attackValue[1] = self.system.planet[int(pNum)].ships[self]
+      attackValue[1] = self.system.planet[int(pNum[0])].ships[self]
       aC = 0
       for x in players:
         aC += x.shipWorth(carriership[x])
@@ -494,7 +519,7 @@ class player:
     else:
       if str(res[1]) == "N":
         successful = True
-        oppo.getCompensation(self, oppo.system.planet[int(choice)].ships[oppo])
+        oppo.getCompensation(self, oppo.system.planet[int(choice[0])].ships[oppo])
         self.winEncounter(self, oppo, choice)
         oppo.loseEncounter(self, oppo, choice)
       elif str(res[0]) == "N":
@@ -513,7 +538,7 @@ class player:
   def winEncounter(self, off, dest, choice):
     if self == off:
       ## colonize
-      off.colonize(dest.system.planet[int(choice)], mothership[off])
+      off.colonize(dest.system.planet[int(choice[0])], mothership[off])
       mothership[off] = 0
       ## return offense allies
       for x in players:
@@ -529,19 +554,22 @@ class player:
         carriership[x] = 0
 
   def loseEncounter(self, off, dest, choice):
-    if self == off:
-      ## kill offense ships/allies
-      for x in players:
-        x.killShips(mothership[x], mothership, x)
+    if off != dest:
+      if self == off:
+        ## kill offense ships/allies
+        for x in players:
+          x.killShips(mothership[x], mothership, x)
 
-    elif self == dest:
-      ## kill defense allies
-      for x in players:
-        x.killShips(carriership[x], carriership, x)
-      ## kill defense ships
-      dest.killShips(dest.system.planet[int(choice)].ships[dest], dest.system.planet[int(choice)].ships, dest)
+      elif self == dest:
+        ## kill defense allies
+        for x in players:
+          x.killShips(carriership[x], carriership, x)
+        ## kill defense ships
+        dest.killShips(dest.system.planet[int(choice[0])].ships[dest], dest.system.planet[int(choice[0])].ships, dest)
+    #else:
 
-# Ending
+
+  # Ending
   def checkWin(self):
     if self.getColonies() >= 5:
       return True
