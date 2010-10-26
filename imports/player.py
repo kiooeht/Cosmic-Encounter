@@ -281,7 +281,20 @@ class player:
       if dest.name == self.name:
         attack = input("Would you like to attack your own system? [y/N]: ")
         if attack.lower() == "y":
-          break
+          colony_exist = False
+          for x in self.system.planet:
+            completely_empty = True
+            for y in x.ships:
+              if x.ships[y] > 0 and y != self:
+                colony_exist = True
+              if x.ships[y] > 0:
+                completely_empty = False
+            if completely_empty:
+              colony_exist = True
+          if not colony_exist:
+            print("There are no colonies to purge, drawing new destiny card")
+          else:
+            break
       else:
         break
     print("Attacking "+dest.name+"'s system")
