@@ -80,6 +80,7 @@ def drawReveal(offP,crd1, defP,crd2,pNum):
       for x in range(mCLen,4):
         print(" ",end='')
     mCLen -= 4
+    if mCLen < 0: mCLen = 0
     print("      ",end='')
     if cCLen >=4:
       print("OOOO")
@@ -88,6 +89,7 @@ def drawReveal(offP,crd1, defP,crd2,pNum):
         print("O",end='')
       print("")
     cCLen -= 4
+    if cCLen < 0: cCLen = 0
 
   print("T: ",end='')
   if offAttack[3] != "N" and offAttack[3] < 10 and offAttack[3] >= 0: print("0",end='')
