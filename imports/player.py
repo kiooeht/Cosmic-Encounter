@@ -142,14 +142,15 @@ class player:
     self.hand.append(crd)
 
   def getCompensation(self,plyr,n):
-    if len(plyr.hand) <= n:
-      for x in range(0, len(plyr.hand)):
-        self.getCard(plyr.giveCompensation(x))
-    else:
-      for x in range(0, n):
-        random.seed(time.gmtime())
-        crd = int(random.random()*len(plyr.hand))
-        self.getCard(plyr.giveCompensation(crd))
+    if len(plyr.hand) > 0:
+      if len(plyr.hand) <= n:
+        for x in range(0, len(plyr.hand)):
+          self.getCard(plyr.giveCompensation(x))
+      else:
+        for x in range(0, n):
+          random.seed(time.gmtime())
+          crd = int(random.random()*len(plyr.hand))
+          self.getCard(plyr.giveCompensation(crd))
 
   def giveCompensation(self, crd):
     return self.hand.pop(crd)
@@ -338,7 +339,10 @@ class player:
       mothership[self] += self.getShips(0,4-mothership[self])
     else:
       mothership[self] += self.getShips(1,4)
-    return [choice, colony]
+    # [0] = planet number (string)
+    # [1] = owner of colony (player)
+    # [2] = owner of system (player)
+    return [choice, colony, dest]
 
 # Alliances
   def allyAsk(self,oppent):
@@ -550,9 +554,15 @@ class player:
 
   def winEncounter(self, off, dest, choice):
     if self == off:
-      ## colonize
-      off.colonize(dest.system.planet[int(choice[0])], mothership[off])
-      mothership[off] = 0
+      if self == choice[2]:
+        ## place ships where ever
+        draw()
+        self.placeShips(mothership[self])
+        mothership[self] = 0
+      else:
+        ## colonize
+        off.colonize(choice[2].system.planet[int(choice[0])], mothership[off])
+        mothership[off] = 0
       ## return offense allies
       for x in players:
         x.placeShips(mothership[x])
@@ -578,7 +588,7 @@ class player:
         for x in players:
           x.killShips(carriership[x], carriership, x)
         ## kill defense ships
-        dest.killShips(dest.system.planet[int(choice[0])].ships[dest], dest.system.planet[int(choice[0])].ships, dest)
+        dest.killShips(choice[2].system.planet[int(choice[0])].ships[dest], choice[2].system.planet[int(choice[0])].ships, dest)
     #else:
 
 
