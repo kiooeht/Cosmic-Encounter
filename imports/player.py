@@ -144,8 +144,8 @@ class player:
   def getCompensation(self,plyr,n):
     if len(plyr.hand) > 0:
       if len(plyr.hand) <= n:
-        for x in range(0, len(plyr.hand)):
-          self.getCard(plyr.giveCompensation(x))
+        self.hand.extend(plyr.hand)
+        plyr.hand = []
       else:
         for x in range(0, n):
           random.seed(time.gmtime())
@@ -336,6 +336,7 @@ class player:
 
     # choose ships
     draw()
+    print("You have "+str(mothership[self])+" ship(s) in the mothership")
     if mothership[self] != 0:
       mothership[self] += self.getShips(0,4-mothership[self])
     else:
