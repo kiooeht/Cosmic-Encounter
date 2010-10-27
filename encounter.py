@@ -12,12 +12,6 @@ from imports.planet import *
 from imports.deck import *
 from imports.drawing import *
 from imports.term import oppts
-import powers
-
-# Create list of all power modules
-listPowers = {}
-for x in powers.__all__:
-  listPowers[x] = __import__(x, globals(), locals(), [], 0)
 
 # Call terminal switches check
 oppts(sys.argv[1:])

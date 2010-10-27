@@ -1,4 +1,5 @@
 from imports.deck import *
+import powers
 
 warp    = {}
 players = []
@@ -30,3 +31,8 @@ destiny = deck()
 numplyrs = 0
 mothership = {}
 carriership = {}
+
+# Create list of all power modules
+listPowers = {}
+for x in powers.__all__:
+  listPowers[x] = __import__(x, globals(), locals(), [], 0)
