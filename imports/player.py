@@ -151,6 +151,7 @@ class player:
           random.seed(time.gmtime())
           crd = int(random.random()*len(plyr.hand))
           self.getCard(plyr.giveCompensation(crd))
+      self.hand.sort()
 
   def giveCompensation(self, crd):
     return self.hand.pop(crd)
@@ -536,7 +537,7 @@ class player:
     else:
       if str(res[1]) == "N":
         successful = True
-        oppo.getCompensation(self, oppo.system.planet[int(choice[0])].ships[oppo])
+        oppo.getCompensation(self, choice[2].system.planet[int(choice[0])].ships[oppo])
         self.winEncounter(self, oppo, choice)
         oppo.loseEncounter(self, oppo, choice)
       elif str(res[0]) == "N":
