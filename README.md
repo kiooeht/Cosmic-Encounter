@@ -15,6 +15,7 @@ Trader<br>
 Tripler<br>
 Virus<br>
 Warpish<br>
+Warrior<br>
 Zombie
 
 Currently in the works are:<br>
