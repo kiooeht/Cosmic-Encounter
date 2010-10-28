@@ -166,10 +166,11 @@ def main():
         if x.checkWin():
           winner = x
           gameover = True
-      # Increase player index
-      plyrix += 1
-      # Set player index back to 0 if greater than number of players
-      if plyrix >= len(players): plyrix = 0
+      if not plyr.goAgain(successful):
+        # Increase player index
+        plyrix += 1
+        # Set player index back to 0 if greater than number of players
+        if plyrix >= len(players): plyrix = 0
       done = input("Is your name Amanda?: ")
       if done.lower() == "y": gameover = True
       # Go to next turn

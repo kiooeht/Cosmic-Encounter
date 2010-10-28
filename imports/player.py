@@ -580,11 +580,13 @@ class player:
         mothership[off] = 0
       ## return offense allies
       for x in players:
+        draw()
         x.placeShips(mothership[x])
         mothership[x] = 0
     elif self == dest:
       ## return defense allies
       for x in players:
+        draw()
         ## defender reward
         if carriership[x] > 0:
           x.drawCards(carriership[x])
