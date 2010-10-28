@@ -222,6 +222,18 @@ class player:
           else:           print("That system does not exist")
         else:             print("Wrong number of arguments")
 
+  def moveShips(self):
+    draw()
+    while 1:
+      move = input("Would you like to move ships around? [y/N]: ")
+      if move.lower() == "n" or move == "":
+        break
+      elif move.lower() == "y":
+        n = self.getShips(0, self.getShipCount())
+        self.placeShips(n)
+      else:
+        print("Pick y or n")
+
   def killShips(self, num, loc, locN):
     warp[self] += num
     loc[locN] -= num
@@ -270,6 +282,7 @@ class player:
     if self.getWarpCount() > 0:
       warp[self] -= 1
       mothership[self] += 1
+    self.moveShips()
 
 # Destiny
   def destiny(self,desCards):
