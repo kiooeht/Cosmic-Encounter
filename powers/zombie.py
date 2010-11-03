@@ -4,5 +4,5 @@ from imports.drawing import draw
 class zombie(player):
   def killShips(self, num, loc, locN):
     loc[locN] -= num
-    draw()
+    draw(self.theGame)
     self.placeShips(num)
