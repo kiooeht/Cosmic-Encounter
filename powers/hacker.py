@@ -1,18 +1,17 @@
 from imports.player import *
 from imports.drawing import printStats
-from imports.globals import players
 
 class hacker(player):
   def getCompensation(self,plyr,n):
     print(self.name+">>")
     while 1:
-      printStats()
-      plyrNum = input("Who would you like to take compensation from? [0-"+str(len(players)-1)+"]: ")
-      if plyrNum.isdigit() and int(plyrNum) < len(players) and int(plyrNum) >= 0:
-        if players[int(plyrNum)] == self:
+      printStats(self.theGame)
+      plyrNum = input("Who would you like to take compensation from? [0-"+str(len(self.theGame.players)-1)+"]: ")
+      if plyrNum.isdigit() and int(plyrNum) < len(self.theGame.players) and int(plyrNum) >= 0:
+        if self.theGame.players[int(plyrNum)] == self:
           print("That is you. You can't compensate yourself.")
         else:
-          plyr = players[int(plyrNum)]
+          plyr = self.theGame.players[int(plyrNum)]
           break
       else:
         print("That player does not exist")

@@ -1,5 +1,4 @@
 from imports.player import *
-from imports.globals import cards
 
 class clone(player):
   def discardUsedECard(self, crd):
@@ -9,7 +8,7 @@ class clone(player):
         self.getCard(crd)
         break
       elif keep.lower() == "n":
-        cards.discardCard(crd)
+        self.theGame.cards.discardCard(crd)
         break
       else:
         print("ERROR: PICK Y OR N")
