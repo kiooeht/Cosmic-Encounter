@@ -369,30 +369,33 @@ class player:
         self.theGame.mothership[off] = 0
       ## return offense allies
       for x in self.theGame.players:
-        draw(self.theGame)
-        x.placeShips(self.theGame.mothership[x])
-        self.theGame.mothership[x] = 0
+        if self.theGame.carriership[x] > 0:
+          draw(self.theGame)
+          x.placeShips(self.theGame.mothership[x])
+          self.theGame.mothership[x] = 0
     elif self == dest:
       ## return defense allies
       for x in self.theGame.players:
-        draw(self.theGame)
         ## defender reward
         if self.theGame.carriership[x] > 0:
+          draw(self.theGame)
           x.drawCards(self.theGame.carriership[x])
-        x.placeShips(self.theGame.carriership[x])
-        self.theGame.carriership[x] = 0
+          x.placeShips(self.theGame.carriership[x])
+          self.theGame.carriership[x] = 0
 
   def loseEncounter(self, off, dest, choice):
     if off != dest:
       if self == off:
         ## kill offense ships/allies
         for x in self.theGame.players:
-          x.killShips(self.theGame.mothership[x], self.theGame.mothership, x)
+          if self.theGame.mothership[x] > 0:
+            x.killShips(self.theGame.mothership[x], self.theGame.mothership, x)
 
       elif self == dest:
         ## kill defense allies
         for x in self.theGame.players:
-          x.killShips(self.theGame.carriership[x], self.theGame.carriership, x)
+          if self.theGame.carriership[x] > 0:
+            x.killShips(self.theGame.carriership[x], self.theGame.carriership, x)
         ## kill defense ships
         dest.killShips(choice[2].system.planet[int(choice[0])].ships[dest], choice[2].system.planet[int(choice[0])].ships, dest)
     #else:
