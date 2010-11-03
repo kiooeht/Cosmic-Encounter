@@ -4,35 +4,38 @@ import time
 
 from .system  import *
 from .planet  import *
-from .globals import *
 from .drawing import draw
 
 class player:
-  def __init__(self, n, ident, pps, spp, crd):
+  def __init__(self, g, n, ident, pps, spp, crd):
+    self.theGame= g
     self.num    = n
     self.name   = ident
-    self.system = system(self, pps, spp)
+    self.system = system(self.theGame, self, pps, spp)
     self.hand   = []
     self.initialHand = crd
     self.drawHand(self.initialHand)
     self.encounterNumber = 1
     self.oppoRevealBool = False
 
+  def getMyGame(self):
+    return self.game
+
   def getShipCount(self):
     n = 0
-    for x in players:
+    for x in self.theGame.players:
       n += x.system.getShipCount(self)
     return n
 
   def getWarpCount(self):
-    if self in warp:
-      return warp[self]
+    if self in self.theGame.warp:
+      return self.theGame.warp[self]
     else:
       return 0
 
   def getColonies(self):
     n = 0
-    for x in players:
+    for x in self.theGame.players:
       if x != self:
         for y in x.system.planet:
           if self in y.ships:
@@ -50,7 +53,7 @@ class player:
     occ = []
     for x in self.system.planet:
       if x.ships[self] != 0: occ.append(x)
-    for x in players:
+    for x in self.theGame.players:
       if x != self:
         for y in x.system.planet:
           if self in y.ships:
@@ -122,18 +125,18 @@ class player:
     self.drawCards(n)
 
   def drawCards(self,n):
-    self.hand.extend(cards.drawCard(n))
+    self.hand.extend(self.theGame.cards.drawCard(n))
     self.hand.sort()
 
   def discardCard(self,crd):
-    cards.discardCard(self.hand.pop(crd))
+    self.theGame.cards.discardCard(self.hand.pop(crd))
 
   def discardECard(self,crd):
-    cards
+    self.theGame.cards.discard(crd)
 
   def discardHand(self):
     for x in range(0, len(self.hand)):
-      discardCard(x)
+      self.discardCard(x)
 
   def useCard(self,crd):
     return self.hand.pop(crd)
@@ -175,13 +178,13 @@ class player:
       else:
         for x in range(0,len(lst)): lst[x] = int(lst[x])
         if len(lst) == 3:
-          if lst[0] <= len(players)-1:
-            if lst[1] <= len(players[lst[0]].system.planet)-1:
+          if lst[0] <= len(self.theGame.players)-1:
+            if lst[1] <= len(self.theGame.players[lst[0]].system.planet)-1:
               if n + lst[2] <= maximum:
-                if self in players[lst[0]].system.planet[lst[1]].ships:
-                  if players[lst[0]].system.planet[lst[1]].ships[self] >= lst[2]:
+                if self in self.theGame.players[lst[0]].system.planet[lst[1]].ships:
+                  if self.theGame.players[lst[0]].system.planet[lst[1]].ships[self] >= lst[2]:
                     n += lst[2]
-                    players[lst[0]].system.planet[lst[1]].editShips(self,lst[2]*-1)
+                    self.theGame.players[lst[0]].system.planet[lst[1]].editShips(self,lst[2]*-1)
                   else:   print("Not enough ships on this planet")
                 else:     print("You do not have a colony there.")
               else:       print("You have selected more ships than you're allowed")
@@ -198,8 +201,8 @@ class player:
     while n > 0:
       print(str(n)+" ships left to place")
       choice  = input("System, Planet, and Number of Ships (space deliminated): ")
-      lst   = choice.split(" ")
-      yay   = 1
+      lst     = choice.split(" ")
+      yay     = 1
       for x in range(0,len(lst)):
         if not lst[x].isdigit():
           yay = 0
@@ -208,13 +211,13 @@ class player:
       else:
         for x in range(0,len(lst)): lst[x] = int(lst[x])
         if len(lst) == 3:
-          if lst[0]  <= len(players)-1:
-            if lst[1] <= len(players[lst[0]].system.planet)-1:
+          if lst[0]  <= len(self.theGame.players)-1:
+            if lst[1] <= len(self.theGame.players[lst[0]].system.planet)-1:
               if lst[2] <= n:
-                if self in players[lst[0]].system.planet[lst[1]].ships:
-                  if players[lst[0]].system.planet[lst[1]].ships[self] > 0:
+                if self in self.theGame.players[lst[0]].system.planet[lst[1]].ships:
+                  if self.theGame.players[lst[0]].system.planet[lst[1]].ships[self] > 0:
                     n -= lst[2]
-                    players[lst[0]].system.planet[lst[1]].editShips(self,lst[2])
+                    self.theGame.players[lst[0]].system.planet[lst[1]].editShips(self,lst[2])
                   else:   print("You do not have a colony there.")
                 else:     print("You do not have a colony there.")
               else:       print("You cannot place that many ships there")
@@ -223,7 +226,7 @@ class player:
         else:             print("Wrong number of arguments")
 
   def moveShips(self):
-    draw()
+    draw(self.theGame)
     while 1:
       move = input("Would you like to move ships around? [y/N]: ")
       if move.lower() == "n" or move == "":
@@ -235,7 +238,7 @@ class player:
         print("Pick y or n")
 
   def killShips(self, num, loc, locN):
-    warp[self] += num
+    self.theGame.warp[self] += num
     loc[locN] -= num
 
   def goAgain(self, success):
@@ -277,107 +280,6 @@ class player:
   def startTurn(self):
     print("Start Turn")
 
-# Regroup
-  def regroup(self):
-    if self.getWarpCount() > 0:
-      warp[self] -= 1
-      mothership[self] += 1
-    self.moveShips()
-
-# Destiny
-  def destiny(self,desCards):
-    dest = None
-    while 1:
-      if len(desCards.cards) == 1:
-        print("Reshuffling destiny deck")
-      dest = desCards.drawCard(1)[0]
-      desCards.discardCard(dest)
-      print("Destiny card: "+dest.name)
-      if dest.name == self.name:
-        attack = input("Would you like to attack your own system? [y/N]: ")
-        if attack.lower() == "y":
-          colony_exist = False
-          for x in self.system.planet:
-            completely_empty = True
-            for y in x.ships:
-              if x.ships[y] > 0 and y != self:
-                colony_exist = True
-              if x.ships[y] > 0:
-                completely_empty = False
-            if completely_empty:
-              colony_exist = True
-          if not colony_exist:
-            print("There are no colonies to purge, drawing new destiny card")
-          else:
-            break
-      else:
-        break
-    print("Attacking "+dest.name+"'s system")
-    return dest
-
-# Launch
-  def launch(self,dest):
-    dest.system.draw()
-    choice = input("Pick a planet number: ")
-    while not choice.isdigit() or int(choice) > len(dest.system.planet)-1 or int(choice) < 0:
-      print("ERROR: YOU SUCK")
-      choice = input("Pick a planet number: ")
-
-    colony = dest
-    if dest == self:
-      # check if planet is empty
-      empty = True
-      for x in self.system.planet[int(choice)].ships:
-        if x != 0:
-          empty = False
-          break
-      if empty: return "successful"
-
-      # choose colony to attack
-      while 1:
-        colonyNum = input("Pick a player to attack on that planet (number [0-"+str(len(players)-1)+"]): ")
-        if colonyNum.isdigit() and int(colonyNum) < len(players) and int(colonyNum) >= 0:
-          if players[int(colonyNum)] == self:
-            print("You can't attack your own colony!")
-          elif players[int(colonyNum)] not in self.system.planet[int(choice)].ships:
-            print("That player does not have a colony there!")
-          elif self.system.planet[int(choice)].ships[players[int(colonyNum)]] == 0:
-            print("That player does not have a colony there!")
-          else:
-            colony = players[int(colonyNum)]
-            break
-
-    # choose ships
-    draw()
-    print("You have "+str(mothership[self])+" ship(s) in the mothership")
-    if mothership[self] != 0:
-      mothership[self] += self.getShips(0,4-mothership[self])
-    else:
-      mothership[self] += self.getShips(1,4)
-    # [0] = planet number (string)
-    # [1] = owner of colony (player)
-    # [2] = owner of system (player)
-    return [choice, colony, dest]
-
-# Alliances
-  def allyAsk(self,oppent):
-    allies = []
-    if len(players) - 2 > 0:
-      askHelp = input(self.name+", Would you like to ask for allies? [Y/n]: ")
-      if askHelp.lower() != "n":
-        for x in players:
-          if x != self and x != oppent:
-            plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
-            while plyHelp.lower() != "y" and plyHelp.lower() != "n":
-              print("Excuse me, sir/madam, but it appears that you have neglected to specify")
-              print("correctly a positive or negative response to my question. If you would")
-              print("be so gracious, would you please try again and don't mess up this time.")
-              print("Thank you.")
-              plyHelp = input("Ask "+x.name+" to be allies? [y/n]: ")
-            if plyHelp.lower() == "y":
-              allies.append(x)
-    return allies
-
   def confirmAlly(self, offP, offAskPly, defP, defAskPly):
     helping = None
     offAsked = False
@@ -418,113 +320,27 @@ class player:
         helpShips= {}
         if helping == "both":
           print("You have chosen to help both the Offense ("+offP.name+") and Defense ("+defP.name+")")
-          draw()
+          draw(self.theGame)
           print("Ships for Offense")
           mothership[self] = self.getShips(1,4)
 
-          draw()
+          draw(self.theGame)
           print("Ships for Defense")
           carriership[self] = self.getShips(1,4)
         else:
           print("You have chosen to help the ",end='')
           if helping == offP:
             print("Offense ("+helping.name+")")
-            draw()
+            draw(self.theGame)
             mothership[self] = self.getShips(1,4)
           else:
             print("Defense ("+helping.name+")")
-            draw()
+            draw(self.theGame)
             carriership[self] = self.getShips(1,4)
-
-# Planning
-  def planning(self,dest):
-    ##offense
-    print(self.name+">>")
-    if len(self.hand) <= 0:
-      self.drawHand(self.initialHand)
-      print("Drawing a new hand")
-    # check if player has an encounter card
-    while not self.hasEncounterCards():
-      self.discardHand()
-      self.drawHand(self.initialHand)
-      print("No encounter cards left, drawing a new hand")
-    # Do any power stuff that should be before chosing cards
-    self.beforeCardsChosen(dest)
-    dest.beforeCardsChosen(self)
-    print(self.name+">>")
-    while 1:
-      self.showHand()
-      selCard = input("Select an encounter card from your hand [0-"+str(len(self.hand)-1)+"]: ")
-      if selCard.isdigit() and int(selCard) <= len(self.hand)-1 and int(selCard) >= 0:
-        # check if card is encounter card
-        if self.isEncounterCard(int(selCard)):
-          offCard = self.useCard(int(selCard))
-          break
-        else:
-          print("That is not an encounter card")
-      else:
-        print("That does not exist in your hand")
-    ##defense
-    print(dest.name+">>")
-    if len(dest.hand) <= 0:
-      dest.drawHand(self.initialHand)
-      print("Drawing a new hand")
-    # check if player has an encounter card
-    if not dest.hasEncounterCards():
-      dest.discardHand()
-      dest.drawHand(self.initialHand)
-      print("No encounter cards left, drawing a new hand")
-    while 1:
-      dest.showHand()
-      selCard = input("Select an encounter card from your hand [0-"+str(len(dest.hand)-1)+"]: ")
-      if selCard.isdigit() and int(selCard) <= len(dest.hand)-1 and int(selCard) >= 0:
-        # check if card is encounter card
-        if dest.isEncounterCard(int(selCard)):
-          defCard = dest.useCard(int(selCard))
-          break
-        else:
-          print("That is not an encounter card")
-      else:
-        print("That does not exist in your hand")
-    return [offCard,defCard]
 
   def beforeCardsChosen(self, oppo):
     # Do nothing
     return 0
-
-# Reveal
-  def reveal(self,crd, pNum):
-    # [0] = card
-    # [1] = number of ships
-    # [2] = total allies
-    # [3] = total power
-    # [4] = hash of individual ally ship numbers
-    attackValue = [0]*5
-    if crd == 99:
-      attackValue[0] = "N"
-    else:
-      attackValue[0] = crd
-
-    attackValue[4] = {}
-
-    if pNum == -1:
-      aC = 0
-      for x in players:
-        if x == self:
-          attackValue[1] = mothership[x]
-        else:
-          aC += x.shipWorth(mothership[x])
-          attackValue[4][x] = mothership[x]
-      attackValue[2] = aC
-    else:
-      attackValue[1] = self.system.planet[int(pNum[0])].ships[self]
-      aC = 0
-      for x in players:
-        aC += x.shipWorth(carriership[x])
-        attackValue[4][x] = carriership[x]
-      attackValue[2] = aC
-
-    return self.revealMath(attackValue)
 
   def revealMath(self, aV):
     if aV[0] != "N":
@@ -537,73 +353,46 @@ class player:
   def shipWorth(self, num):
     return num * 1
 
-# Resolution
-  def resolution(self, oppo, res, plan, choice):
-    if str(res[0]) != "N" and str(res[1]) != "N":
-      if res[0] > res[1]:
-        successful = True
-        self.winEncounter(self, oppo, choice)
-        oppo.loseEncounter(self, oppo, choice)
-      else:
-        successful = False
-        self.loseEncounter(self, oppo, choice)
-        oppo.winEncounter(self, oppo, choice)
-    else:
-      if str(res[1]) == "N":
-        successful = True
-        oppo.getCompensation(self, choice[2].system.planet[int(choice[0])].ships[oppo])
-        self.winEncounter(self, oppo, choice)
-        oppo.loseEncounter(self, oppo, choice)
-      elif str(res[0]) == "N":
-        successful = False
-        self.getCompensation(oppo, mothership[self])
-        self.loseEncounter(self, oppo, choice)
-        oppo.winEncounter(self, oppo, choice)
-
-    self.discardUsedECard(plan[0])
-    oppo.discardUsedECard(plan[1])
-    return successful
-
   def discardUsedECard(self, crd):
-    cards.discardCard(crd)
+    self.theGame.cards.discardCard(crd)
 
   def winEncounter(self, off, dest, choice):
     if self == off:
       if self == choice[2]:
         ## place ships where ever
-        draw()
-        self.placeShips(mothership[self])
-        mothership[self] = 0
+        draw(self.theGame)
+        self.placeShips(self.theGame.mothership[self])
+        self.theGame.mothership[self] = 0
       else:
         ## colonize
-        off.colonize(choice[2].system.planet[int(choice[0])], mothership[off])
-        mothership[off] = 0
+        off.colonize(choice[2].system.planet[int(choice[0])], self.theGame.mothership[off])
+        self.theGame.mothership[off] = 0
       ## return offense allies
-      for x in players:
-        draw()
-        x.placeShips(mothership[x])
-        mothership[x] = 0
+      for x in self.theGame.players:
+        draw(self.theGame)
+        x.placeShips(self.theGame.mothership[x])
+        self.theGame.mothership[x] = 0
     elif self == dest:
       ## return defense allies
-      for x in players:
-        draw()
+      for x in self.theGame.players:
+        draw(self.theGame)
         ## defender reward
-        if carriership[x] > 0:
-          x.drawCards(carriership[x])
-        x.placeShips(carriership[x])
-        carriership[x] = 0
+        if self.theGame.carriership[x] > 0:
+          x.drawCards(self.theGame.carriership[x])
+        x.placeShips(self.theGame.carriership[x])
+        self.theGame.carriership[x] = 0
 
   def loseEncounter(self, off, dest, choice):
     if off != dest:
       if self == off:
         ## kill offense ships/allies
-        for x in players:
-          x.killShips(mothership[x], mothership, x)
+        for x in self.theGame.players:
+          x.killShips(self.theGame.mothership[x], self.theGame.mothership, x)
 
       elif self == dest:
         ## kill defense allies
-        for x in players:
-          x.killShips(carriership[x], carriership, x)
+        for x in self.theGame.players:
+          x.killShips(self.theGame.carriership[x], self.theGame.carriership, x)
         ## kill defense ships
         dest.killShips(choice[2].system.planet[int(choice[0])].ships[dest], choice[2].system.planet[int(choice[0])].ships, dest)
     #else:

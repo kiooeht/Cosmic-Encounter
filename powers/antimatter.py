@@ -1,8 +1,8 @@
 from imports.player import *
 
 class antimatter(player):
-  def __init__(self, n, ident, pps, spp, crd):
-    super().__init__(n, ident, pps, spp, crd)
+  def __init__(self, g, n, ident, pps, spp, crd):
+    super().__init__(g, n, ident, pps, spp, crd)
     self.oppoRevealBool = True
 
   def revealMath(self, aV):

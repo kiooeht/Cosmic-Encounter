@@ -5,7 +5,7 @@ import random
 import time
 
 sys.path.append("./powers")
-from imports.globals import *
+from imports.game import *
 from imports.player import *
 from imports.system import *
 from imports.planet import *
@@ -18,33 +18,24 @@ oppts(sys.argv[1:])
 
 # Create player at the same time adding them to all appropriate global lists
 # (players, warp, mothership, carriership, destiny)
-def newPlayer(n, name, planets, ships, crd):
+def newPlayer(theGame, n, name, planets, ships, crd):
   #if n == 0:
-  newplayer = getattr(listPowers["mite"], "mite")(n, name, planets, ships, crd)
+  newplayer = getattr(theGame.listPowers["mite"], "mite")(theGame, n, name, planets, ships, crd)
   #else:
   #   newplayer = powersList[9](n, name, planets, ships, crd)
-  players.append(newplayer)
-  warp[newplayer] = 0
-  mothership[newplayer] = 0
-  carriership[newplayer] = 0
+  theGame.players.append(newplayer)
+  theGame.warp[newplayer] = 0
+  theGame.mothership[newplayer] = 0
+  theGame.carriership[newplayer] = 0
   for x in range(0,3):
-    destiny.addCards([newplayer])
-  global numplyrs
-  numplyrs += 1
+    theGame.destiny.addCards([newplayer])
+  theGame.numplyrs += 1
 
 # Main game loop
 def main():
+  theGame = game()
+
   #setup
-  gameover = False
-  winner = None
-
-  # Use global variables
-  global warp
-  global players
-  global eCards
-  global cards
-  global destiny
-
   mode = "meh"
   while mode.lower() != "b" and mode.lower() != "a" and mode.lower() != "":
     mode = input("Basic or Advanced? [B/a]: ")
@@ -130,7 +121,7 @@ def main():
       if cardspp == "": cardspp = "7"
 
     # Create new player based on inputted numbers
-    newPlayer(numplyrs, name,int(planets),int(shipspp), int(cardspp))
+    newPlayer(theGame, theGame.numplyrs, name, int(planets), int(shipspp), int(cardspp))
 
     # Check if there should be more players
     choice  = input("Add more players? [Y/n]: ")
@@ -139,40 +130,40 @@ def main():
   #start loop
   random.seed(time.gmtime())
   # Random starting player
-  plyrix = int(random.random()*len(players))
-  while not gameover:
+  theGame.plyrix = int(random.random()*len(theGame.players))
+  while not theGame.gameover:
     #start turn
     # Set current player
-    plyr = players[plyrix]
-    mothership["owner"] = plyr
+    plyr = theGame.players[theGame.plyrix]
+    theGame.mothership["owner"] = plyr
     # Empty mothership (just in case)
-    for x in players:
-      mothership[x] = 0
+    for x in theGame.players:
+      theGame.mothership[x] = 0
     if plyr.encounterNumber == 1:
       print("Starting player turn:",plyr.name)
     print("Starting new encounter")
     prompt = plyr.name + ">> "
 
     #regroup
-    plyr.regroup()
+    theGame.regroup(plyr)
     #destiny
-    desCard = plyr.destiny(destiny)
+    desCard = theGame.destinyPhase(plyr, theGame.destiny)
     #launch
-    choice = plyr.launch(desCard)
+    choice = theGame.launch(plyr, desCard)
 
     if choice == "successful":
       # If any players have 5 colonies, they win
-      for x in players:
+      for x in theGame.players:
         if x.checkWin():
-          winner = x
-          gameover = True
+          theGame.winner = x
+          theGame.gameover = True
       if not plyr.goAgain(successful):
         # Increase player index
-        plyrix += 1
+        theGame.plyrix += 1
         # Set player index back to 0 if greater than number of players
-        if plyrix >= len(players): plyrix = 0
+        if theGame.plyrix >= len(theGame.players): theGame.plyrix = 0
       done = input("Is your name Amanda?: ")
-      if done.lower() == "y": gameover = True
+      if done.lower() == "y": theGame.gameover = True
       # Go to next turn
       continue
 
@@ -180,53 +171,40 @@ def main():
 
     #alliances
     # Offense and defense ask for allies
-    offAskPly = plyr.allyAsk(desCard)
-    defAskPly = desCard.allyAsk(plyr)
+    offAskPly = theGame.allyAsk(plyr, desCard)
+    defAskPly = theGame.allyAsk(desCard, plyr)
     # Other players confirm
-    for x in players:
+    for x in theGame.players:
       if x != plyr and x != desCard:
         x.confirmAlly(plyr, offAskPly, desCard, defAskPly)
 
     #planning
-    plan = plyr.planning(desCard)
+    plan = theGame.planning(plyr, desCard)
 
     #reveal
-    res = drawReveal(plyr,plan[0],desCard,plan[1],choice)
+    res = theGame.reveal(plyr,plan[0],desCard,plan[1],choice)
 
     #resolution
-    successful = plyr.resolution(desCard, res, plan, choice)
+    successful = theGame.resolution(plyr, desCard, res, plan, choice)
 
     #end turn
-    # If any players have 5 colonies, they win
-    for x in players:
-      if x.checkWin():
-        winner = x
-        gameover = True
-
-    if not plyr.goAgain(successful):
-      # Increase player index
-      plyrix += 1
-      # Set player index back to 0 if greater than number of players
-      if plyrix >= len(players): plyrix = 0
-
-    done = input("Is your name Amanda?: ")
-    if done.lower() == "y": gameover = True
+    theGame.endTurn(plyr, successful)
 
   #end loop
 
   #victory
-  if winner != None:
-    print(winner.name + " has won the game!")
+  if theGame.winner != None:
+    print(theGame.winner.name + " has won the game!")
 
   #players[0].colonize(players[1].system.planet[1],3)
   #players[0].discardCard(4)
 
   # Print a whole bunch of game stats
-  draw()
-  printStats()
-  players[0].showHand()
-  players[1].showHand()
-  cards.printDeck()
-  destiny.printDeck()
+  draw(theGame)
+  printStats(theGame)
+  theGame.players[0].showHand()
+  theGame.players[1].showHand()
+  theGame.cards.printDeck()
+  theGame.destiny.printDeck()
 
 main()

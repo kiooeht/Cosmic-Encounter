@@ -1,16 +1,14 @@
 import sys
 
-from .globals import *
-
-def draw():
+def draw(theGame):
   print("\n", end='')
-  for x in players:
+  for x in theGame.players:
     x.system.draw()
 
-def printStats():
+def printStats(theGame):
   print("Stats           | Ships   Colonies   Planets   Cards  ")
   print("----------------+-------------------------------------")
-  for x in players:
+  for x in theGame.players:
     stats = x.getStats()
     print("\t",x.name, end='')
     if len(x.name) < 7: print("\t", end='')
@@ -21,20 +19,7 @@ def printStats():
     print("\t ",stats[2],"\t    ",stats[3],"\t      ",stats[4])
   print("")
 
-def drawReveal(offP,crd1, defP,crd2,pNum):
-  if offP.oppoRevealBool and defP.oppoRevealBool:
-    offAttack = offP.reveal(crd1, -1)
-    defAttack = defP.reveal(crd2, pNum)
-  elif offP.oppoRevealBool:
-    offAttack = offP.reveal(crd1, -1)
-    defAttack = offP.oppoReveal(defP, crd2, pNum)
-  elif defP.oppoRevealBool:
-    offAttack = defP.oppoReveal(offP, crd1, -1)
-    defAttack = defP.reveal(crd2, pNum)
-  else:
-    offAttack = offP.reveal(crd1, -1)
-    defAttack = defP.reveal(crd2, pNum)
-
+def drawReveal(offAttack, defAttack):
   print("Offense   Defense")
   print("+----+    +----+")
   print("|    |    |    |")
@@ -98,5 +83,3 @@ def drawReveal(offP,crd1, defP,crd2,pNum):
   print("    T: ",end='')
   if defAttack[3] != "N" and defAttack[3] < 10 and defAttack[3] >= 0: print("0",end='')
   print(defAttack[3])
-
-  return [offAttack[3], defAttack[3]]
