@@ -116,9 +116,9 @@ class game:
     draw(self)
     print("You have "+str(self.mothership[plyr])+" ship(s) in the mothership")
     if self.mothership[plyr] != 0:
-      self.mothership[plyr] += plyr.getShips(0,4-self.mothership[plyr])
+      self.mothership[plyr] += plyr.getShips(0,plyr.maxShipsPerLoad()-self.mothership[plyr])
     else:
-      self.mothership[plyr] += plyr.getShips(1,4)
+      self.mothership[plyr] += plyr.getShips(1,plyr.maxShipsPerLoad())
     # [0] = planet number (string)
     # [1] = owner of colony (player)
     # [2] = owner of system (player)

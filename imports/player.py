@@ -266,6 +266,9 @@ class player:
   def isEncounterCard(self, crd):
     return self.hand[crd] < 90 or self.hand[crd] == 99
 
+  def maxShipsPerLoad(self):
+    return 4
+
 
 
 ################################################################################
@@ -322,21 +325,21 @@ class player:
           print("You have chosen to help both the Offense ("+offP.name+") and Defense ("+defP.name+")")
           draw(self.theGame)
           print("Ships for Offense")
-          mothership[self] = self.getShips(1,4)
+          mothership[self] = self.getShips(1,self.maxShipsPerLoad())
 
           draw(self.theGame)
           print("Ships for Defense")
-          carriership[self] = self.getShips(1,4)
+          carriership[self] = self.getShips(1,self.maxShipsPerLoad())
         else:
           print("You have chosen to help the ",end='')
           if helping == offP:
             print("Offense ("+helping.name+")")
             draw(self.theGame)
-            mothership[self] = self.getShips(1,4)
+            self.theGame.mothership[self] = self.getShips(1,self.maxShipsPerLoad())
           else:
             print("Defense ("+helping.name+")")
             draw(self.theGame)
-            carriership[self] = self.getShips(1,4)
+            self.theGame.carriership[self] = self.getShips(1,self.maxShipsPerLoad())
 
   def beforeCardsChosen(self, oppo):
     # Do nothing
