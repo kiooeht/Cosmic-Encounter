@@ -19,10 +19,20 @@ oppts(sys.argv[1:])
 # Create player at the same time adding them to all appropriate global lists
 # (players, warp, mothership, carriership, destiny)
 def newPlayer(theGame, n, name, planets, ships, crd):
-  #if n == 0:
-  newplayer = getattr(theGame.listPowers["mite"], "mite")(theGame, n, name, planets, ships, crd)
-  #else:
-  #   newplayer = powersList[9](n, name, planets, ships, crd)
+  random.seed(time.gmtime())
+  youcandothat = False
+  while not youcandothat:
+    youcandothat = True
+    powstr = random.choice(list(theGame.listPowers.keys()))
+    print(powstr,end=": ")
+    for x in theGame.usedPowers:
+      if x == powstr:
+        youcandothat = False
+        print("already used, try again")
+  print("")
+  newplayer = getattr(theGame.listPowers[powstr], powstr)(theGame, n, name, planets, ships, crd)
+  theGame.usedPowers.append(powstr)
+
   theGame.players.append(newplayer)
   theGame.warp[newplayer] = 0
   theGame.mothership[newplayer] = 0
