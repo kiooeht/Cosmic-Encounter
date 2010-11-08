@@ -415,4 +415,5 @@ class player:
     # Do nothing
     return 0
 
-  def afterLaunch(self, theGame, plyr, dest):
+  def afterLaunch(self, theGame, plyr, dest, choice):
+    return 0
