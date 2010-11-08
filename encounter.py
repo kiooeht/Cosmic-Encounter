@@ -150,6 +150,9 @@ def main():
     desCard = theGame.destinyPhase(plyr, theGame.destiny)
     #launch
     choice = theGame.launch(plyr, desCard)
+    #after launch
+    for x in theGame.players:
+      x.afterLaunch(theGame, plyr, desCard, choice)
 
     if choice == "successful":
       # If any players have 5 colonies, they win

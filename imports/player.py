@@ -341,10 +341,6 @@ class player:
             draw(self.theGame)
             self.theGame.carriership[self] = self.getShips(1,self.maxShipsPerLoad())
 
-  def beforeCardsChosen(self, oppo):
-    # Do nothing
-    return 0
-
   def revealMath(self, aV):
     if aV[0] != "N":
       aV[3] = aV[0] + aV[1] + aV[2]
@@ -410,3 +406,13 @@ class player:
       return True
     else:
       return False
+
+
+###########################################
+### EXTRA POWER PHASE POSSIBILITIES #######
+###########################################
+  def beforeCardsChosen(self, theGame, plyr, oppo):
+    # Do nothing
+    return 0
+
+  def afterLaunch(self, theGame, plyr, dest):

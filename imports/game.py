@@ -156,8 +156,8 @@ class game:
       plyr.drawHand(plyr.initialHand)
       print("No encounter cards left, drawing a new hand")
     # Do any power stuff that should be before chosing cards
-    plyr.beforeCardsChosen(dest)
-    dest.beforeCardsChosen(plyr)
+    for x in self.players:
+      x.beforeCardsChosen(self, plyr, dest)
     print(plyr.name+">>")
     while 1:
       plyr.showHand()
