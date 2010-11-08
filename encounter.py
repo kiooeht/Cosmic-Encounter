@@ -13,25 +13,29 @@ from imports.deck import *
 from imports.drawing import *
 from imports.term import oppts
 
-# Call terminal switches check
-oppts(sys.argv[1:])
 
 # Create player at the same time adding them to all appropriate global lists
 # (players, warp, mothership, carriership, destiny)
 def newPlayer(theGame, n, name, planets, ships, crd):
-  random.seed(time.gmtime())
-  youcandothat = False
-  while not youcandothat:
-    youcandothat = True
-    powstr = random.choice(list(theGame.listPowers.keys()))
-    print(powstr,end=": ")
-    for x in theGame.usedPowers:
-      if x == powstr:
-        youcandothat = False
-        print("already used, try again")
-  print("")
-  newplayer = getattr(theGame.listPowers[powstr], powstr)(theGame, n, name, planets, ships, crd)
-  theGame.usedPowers.append(powstr)
+  if (theGame.powerOpts == "random"):
+    random.seed(time.gmtime())
+    youcandothat = False
+    while not youcandothat:
+      youcandothat = True
+      powstr = random.choice(list(theGame.listPowers.keys()))
+      print(powstr,end=": ")
+      for x in theGame.usedPowers:
+        if x == powstr:
+          youcandothat = False
+          print("already used, try again")
+    theGame.usedPowers.append(powstr)
+    print("")
+  else:
+    powstr = theGame.powerOpts
+  if (theGame.powerOpts == "nopower"):
+    newplayer = player(theGame, n, name, planets, ships, crd)
+  else:
+    newplayer = getattr(theGame.listPowers[powstr], powstr)(theGame, n, name, planets, ships, crd)
 
   theGame.players.append(newplayer)
   theGame.warp[newplayer] = 0
@@ -44,6 +48,9 @@ def newPlayer(theGame, n, name, planets, ships, crd):
 # Main game loop
 def main():
   theGame = game()
+
+  # Call terminal switches check
+  oppts(sys.argv[1:], theGame)
 
   #setup
   mode = "meh"

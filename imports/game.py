@@ -42,7 +42,7 @@ class game:
     for x in powers.__all__:
       self.listPowers[x] = __import__(x, globals(), locals(), [], 0)
     self.usedPowers = []
-    self.randPows = False
+    self.powerOpts = "random"
 
 ########## Regroup ##########
   def regroup(self, plyr):
