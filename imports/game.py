@@ -257,7 +257,13 @@ class game:
 ########## Resolution ##########
   def resolution(self, plyr, oppo, res, plan, choice):
     if str(res[0]) != "N" and str(res[1]) != "N":
-      if res[0] > res[1]:
+      offWin = res[0] > res[1]
+      if plyr.calcWin:
+        offWin = plyr.winCalcuation(res)
+      if oppo.calcWin:
+        offWin = oppo.winCalcuation(res)
+
+      if offWin:
         successful = True
         plyr.winEncounter(plyr, oppo, choice)
         oppo.loseEncounter(plyr, oppo, choice)

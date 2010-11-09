@@ -18,6 +18,7 @@ class player:
     self.encounterNumber = 1
     self.mathOverrideSelf = False
     self.mathOverrideOppo = False
+    self.calcWin = False
 
   def getMyGame(self):
     return self.game
