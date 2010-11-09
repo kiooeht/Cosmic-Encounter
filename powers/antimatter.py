@@ -4,6 +4,7 @@ class antimatter(player):
   def __init__(self, g, n, ident, pps, spp, crd):
     super().__init__(g, n, ident, pps, spp, crd)
     self.mathOverrideOppo = True
+    self.calcWin = True
 
   def revealMath(self, aV):
     if aV[0] != "N":
@@ -20,3 +21,6 @@ class antimatter(player):
       aV[3] = "N"
 
     return aV
+
+  def winCalcuation(self, res):
+    return res[0] < res[1]
