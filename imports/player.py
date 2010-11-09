@@ -144,6 +144,7 @@ class player:
 
   def getCard(self,crd):
     self.hand.append(crd)
+    self.hand.sort()
 
   def getCompensation(self,plyr,n):
     if len(plyr.hand) > 0:
