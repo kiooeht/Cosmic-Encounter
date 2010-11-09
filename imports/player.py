@@ -16,7 +16,8 @@ class player:
     self.initialHand = crd
     self.drawHand(self.initialHand)
     self.encounterNumber = 1
-    self.mathOverride = False
+    self.mathOverrideSelf = False
+    self.mathOverrideOppo = False
 
   def getMyGame(self):
     return self.game
