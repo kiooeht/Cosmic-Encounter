@@ -12,6 +12,7 @@ Machine<br>
 Macron<br>
 Masochist<br>
 Mirror<br>
+Mite<br>
 Trader<br>
 Tripler<br>
 Virus<br>
@@ -20,4 +21,4 @@ Warrior<br>
 Zombie
 
 Currently in the works are:<br>
-Mite<br>
+Nothing! :)
