@@ -51,6 +51,12 @@ def main():
 
   # Call terminal switches check
   oppts(sys.argv[1:], theGame)
+  if theGame.powerOpts == "random":
+    print("Random powers being used.")
+  elif theGame.powerOpts == "nopower":
+    print("No powers being used.")
+  else:
+    print("Power being used: "+theGame.powerOpts)
 
   #setup
   mode = "meh"
