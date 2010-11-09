@@ -238,6 +238,11 @@ class game:
     offAttackValue = plyr.revealMath(offAttackValue)
     defAttackValue = dest.revealMath(defAttackValue)
 
+    for x in self.players:
+      if x.mathOverride:
+        offAttackValue = x.powerMath(offAttackValue)
+        defAttackValue = x.powerMath(defAttackValue)
+
     drawReveal(offAttackValue, defAttackValue)
 
     return [offAttackValue[3], defAttackValue[3]]

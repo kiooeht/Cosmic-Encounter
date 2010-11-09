@@ -16,7 +16,7 @@ class player:
     self.initialHand = crd
     self.drawHand(self.initialHand)
     self.encounterNumber = 1
-    self.oppoRevealBool = False
+    self.mathOverride = False
 
   def getMyGame(self):
     return self.game
@@ -416,4 +416,7 @@ class player:
     return 0
 
   def afterLaunch(self, theGame, plyr, dest, choice):
+    return 0
+
+  def powerMath(self, theGame, plyr, dest, attackValue):
     return 0
