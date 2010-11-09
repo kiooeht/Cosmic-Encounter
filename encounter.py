@@ -174,22 +174,15 @@ def main():
     #launch
     choice = theGame.launch(plyr, desCard)
     #after launch
+    aftLa = []
     for x in theGame.players:
-      x.afterLaunch(theGame, plyr, desCard, choice)
+      aftLa.append(x.afterLaunch(theGame, plyr, desCard, choice))
+    for x in aftLa:
+      if x != None:
+        successful = x
 
-    if choice == "successful":
-      # If any players have 5 colonies, they win
-      for x in theGame.players:
-        if x.checkWin():
-          theGame.winner = x
-          theGame.gameover = True
-      if not plyr.goAgain(successful):
-        # Increase player index
-        theGame.plyrix += 1
-        # Set player index back to 0 if greater than number of players
-        if theGame.plyrix >= len(theGame.players): theGame.plyrix = 0
-      done = input("Is your name Amanda?: ")
-      if done.lower() == "y": theGame.gameover = True
+    if successful == "successful":
+      theGame.endTurn(plyr, successful)
       # Go to next turn
       continue
 
