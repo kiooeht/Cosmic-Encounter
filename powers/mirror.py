@@ -1,10 +1,10 @@
 from imports.player import *
 
 class mirror(player):
-  def __init__(self, n, ident, pps, spp, crd):
-    super().__init__(n, ident, pps, spp, crd)
+  def __init__(self, g, n, ident, pps, spp, crd):
+    super().__init__(g, n, ident, pps, spp, crd)
     self.oppoRevealBool = True
-    self.mirror = False
+    self.mathOverride = False
 
   def rev(self, n):
     if n < 10:
@@ -14,43 +14,21 @@ class mirror(player):
     result += str(n)
     return int(result[::-1])
 
-  def revealMath(self, aV):
-    aV[0] = self.rev(aV[0])
-    return super().revealMath(aV)
+  def powerMath(self, aV):
+    if aV[0] != "N":
+      aV[0] = self.rev(aV[0])
+      aV[3] = aV[0] + aV[1] + aV[2]
+    return aV
 
-  def oppoReveal(self,oppo,crd, pNum):
-    # [0] = card
-    # [1] = number of ships
-    # [2] = total allies
-    # [3] = total power
-    # [4] = hash of individual ally ship numbers
-    attackValue = [0]*5
-    if crd == 99:
-      attackValue[0] = "N"
-    else:
-      attackValue[0] = crd
-
-    attackValue[4] = {}
-
-    if pNum == -1:
-      aC = 0
-      for x in players:
-        if x == oppo:
-          attackValue[1] = mothership[x]
+  def beforeCardsChosen(self, theGame, plyr, oppo):
+    if self == plyr or self == oppo:
+      while 1:
+        checkMirror = input(self.name+">> Would you like to mirror? [y/n]: ")
+        if checkMirror.lower() == "n":
+          self.mathOverride = False
+          return 0
+        elif checkMirror.lower() == "y":
+          self.mathOverride = True
+          return 0
         else:
-          aC += x.shipWorth(mothership[x])
-          attackValue[4][x] = mothership[x]
-      attackValue[2] = aC
-    else:
-      attackValue[1] = oppo.system.planet[int(pNum[0])].ships[oppo]
-      aC = 0
-      for x in players:
-        aC += x.shipWorth(carriership[x])
-        attackValue[4][x] = carriership[x]
-      attackValue[2] = aC
-
-    return self.oppoRevealMath(oppo, attackValue)
-
-  def oppoRevealMath(self, oppo, aV):
-    aV[0] = self.rev(aV[0])
-    return oppo.revealMath(aV)
+          print("Whoa there, buddy! You need to input an answer in a correct format!")
