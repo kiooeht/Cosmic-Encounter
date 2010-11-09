@@ -5,11 +5,13 @@ It is written in Python 3.1.2 and in it's current state it is just command line 
 
 <h3>Powers</h3>
 Currently working powers are:<br>
+Anti-Matter<br>
 Clone<br>
 Hacker<br>
 Machine<br>
 Macron<br>
 Masochist<br>
+Mirror<br>
 Mite<br>
 Trader<br>
 Tripler<br>
@@ -19,5 +21,4 @@ Warrior<br>
 Zombie
 
 Currently in the works are:<br>
-Antimatter<br>
-Mirror
+Nothing! :)
