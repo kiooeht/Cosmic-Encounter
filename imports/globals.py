@@ -1,4 +1,5 @@
-from stuff.deck import *
+from imports.deck import *
+import powers
 
 warp    = {}
 players = []
@@ -24,8 +25,14 @@ eCards = [0,              \
           99,99,99,99,99, \
           99,99,99,99,99]
           # 99 = N
+          # 90 - 98 Reserved for Artifacts
 cards   = deck(eCards)
 destiny = deck()
 numplyrs = 0
 mothership = {}
 carriership = {}
+
+# Create list of all power modules
+listPowers = {}
+for x in powers.__all__:
+  listPowers[x] = __import__(x, globals(), locals(), [], 0)

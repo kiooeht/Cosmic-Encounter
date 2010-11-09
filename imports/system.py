@@ -1,10 +1,10 @@
 import sys
 
 from .planet import *
-from .globals import *
 
 class system:
-  def __init__(self, own, plan, spp):
+  def __init__(self, g, own, plan, spp):
+    self.theGame= g
     self.owner  = own
     self.planet = []
     for x in range(0,plan):
@@ -30,7 +30,7 @@ class system:
       sys.stdout.write("-----")
     print("\n", end='')
 
-    for x in players:
+    for x in self.theGame.players:
       print("\t",x.name, end='')
       if len(x.name) < 7: print("\t", end='')
       print("|  ", end='')
