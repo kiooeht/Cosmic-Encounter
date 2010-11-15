@@ -2,7 +2,6 @@ import random
 import time
 
 from imports.player import *
-from imports.globals import mothership
 
 class mite(player):
   def afterLaunch(self, theGame, plyr, dest, choice):
