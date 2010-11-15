@@ -256,7 +256,9 @@ class game:
 
 ########## Resolution ##########
   def resolution(self, plyr, oppo, res, plan, choice):
-    if str(res[0]) != "N" and str(res[1]) != "N":
+    if str(res[0]) == "N" and str(res[1]) == "N":
+      successful = self.negotiation(plyr, oppo)
+    elif str(res[0]) != "N" and str(res[1]) != "N":
       offWin = res[0] > res[1]
       if plyr.calcWin:
         offWin = plyr.winCalcuation(res)
@@ -286,6 +288,27 @@ class game:
     plyr.discardUsedECard(plan[0])
     oppo.discardUsedECard(plan[1])
     return successful
+
+  def negotiation(self, plyr, oppo):
+    print("You have one minutes to make a deal.")
+    while 1:
+      deal = input("Was the deal successful? [Y/n]: ")
+      if deal.lower() == "y" or deal == "":
+        print("Success!")
+        return True
+      elif deal.lower() == "n":
+        print("Pick 3 ships to kill")
+        draw(self)
+        print(plyr.name+">>\t",end='')
+        self.carriership[plyr] += plyr.getShips(3, 3)
+        print(oppo.name+">>\t",end='')
+        self.carriership[oppo] += oppo.getShips(3, 3)
+
+        plyr.killShips(3, self.carriership, plyr)
+        oppo.killShips(3, self.carriership, oppo)
+        return False
+      else:
+        print("Try again")
 
 ########## End Turn ##########
   def endTurn(self, plyr, success):
