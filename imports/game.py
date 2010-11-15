@@ -24,11 +24,16 @@ class game:
                    23,             \
                    30,             \
                    40,             \
-                   99,99,99,99,99, \
-                   99,99,99,99,99, \
-                   99,99,99,99,99]
-                   # 99 = N
-                   # 90 - 98 Reserved for Artifacts
+                   90,90,90,90,90, \
+                   90,90,90,90,90, \
+                   90,90,90,90,90, \
+                   91,91]
+                   # 90 = N
+                   # >= 91 Reserved for Artifacts
+                   # 91 = MT (Mobius Tubes)
+    self.artDef = {}
+    self.artDef[90] = "N"
+    self.artDef[91] = "MT"
     self.cards   = deck(self.eCards)
     self.destiny = deck()
     self.numplyrs = 0
@@ -206,12 +211,12 @@ class game:
     # [4] = hash of individual ally ship numbers
     offAttackValue = [0]*5
     defAttackValue = [0]*5
-    if crd1 == 99:
-      offAttackValue[0] = "N"
+    if crd1 >= 90:
+      offAttackValue[0] = self.artDef[crd1]
     else:
       offAttackValue[0] = crd1
-    if crd2 == 99:
-      defAttackValue[0] = "N"
+    if crd2 >= 90:
+      defAttackValue[0] = self.artDef[crd2]
     else:
       defAttackValue[0] = crd2
 

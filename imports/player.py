@@ -85,7 +85,10 @@ class player:
       print("")
       for x in range(0+(l-lt),7+(l-lt)):
         sys.stdout.write("| ")
-        if self.hand[x] == 99: sys.stdout.write("N ")
+        if self.hand[x] >= 90:
+          sys.stdout.write(self.theGame.artDef[self.hand[x]])
+          if len(self.theGame.artDef[self.hand[x]]) == 1:
+            sys.stdout.write(" ")
         else:
           if self.hand[x] < 10: sys.stdout.write("0")
           sys.stdout.write(str(self.hand[x]))
@@ -109,7 +112,10 @@ class player:
       print("")
       for x in range(l-lt,l):
         sys.stdout.write("| ")
-        if self.hand[x] == 99: sys.stdout.write("N ")
+        if self.hand[x] >= 90:
+          sys.stdout.write(self.theGame.artDef[self.hand[x]])
+          if len(self.theGame.artDef[self.hand[x]]) == 1:
+            sys.stdout.write(" ")
         else:
           if self.hand[x] < 10: sys.stdout.write("0")
           sys.stdout.write(str(self.hand[x]))
@@ -262,12 +268,12 @@ class player:
 
   def hasEncounterCards(self):
     for x in self.hand:
-      if x < 90 or x == 99:
+      if x <= 90:
         return True
     return False
 
   def isEncounterCard(self, crd):
-    return self.hand[crd] < 90 or self.hand[crd] == 99
+    return self.hand[crd] <= 90
 
   def maxShipsPerLoad(self):
     return 4
