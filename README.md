@@ -4,7 +4,7 @@ This program is an attempt to recreate the board game "<a href="http://en.wikipe
 It is written in Python 3.1.2 and in it's current state it is just command line based.
 
 <h3>Powers</h3>
-Currently working powers are:<br>
+<b>Working:</b><br>
 Anti-Matter<br>
 Clone<br>
 Hacker<br>
@@ -21,5 +21,5 @@ Warpish<br>
 Warrior<br>
 Zombie
 
-Currently in the works are:<br>
+<b>Half-Working:</b><br>
 Nothing! :)
