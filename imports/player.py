@@ -19,8 +19,6 @@ class player:
     self.mathOverrideSelf = False
     self.mathOverrideOppo = False
     self.calcWin = False
-    self.getCard(93)
-    self.getCard(94)
 
   def getShipCount(self):
     n = 0

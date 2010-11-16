@@ -38,12 +38,14 @@ class game:
                    # 92 = FF (Force Field)
                    # 93 = EC (Emotion Control)
                    # 94 = QA (Quash)
+                   # 95 = PL (Plague)
     self.artDef = {}
     self.artDef[90] = "N"
     self.artDef[91] = mobius.mobius(self)
     self.artDef[92] = forcefield.forcefield(self)
     self.artDef[93] = emotion.emotion(self)
     self.artDef[94] = quash.quash(self)
+    self.artDef[95] = plague.plague(self)
     self.cards   = deck(self, self.eCards)
     self.destiny = deck(self)
     self.numplyrs = 0
