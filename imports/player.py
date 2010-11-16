@@ -171,7 +171,7 @@ class player:
         for p in self.theGame.artDef[x].phases:
           if p == phase:
             while 1:
-              useArt = input("Would you like to use "+ \
+              useArt = input(self.name+">> Would you like to use "+ \
                              self.theGame.artDef[x].name + "? [y/N]: ")
               if useArt.lower() == "y":
                 self.theGame.artDef[x].use(self)

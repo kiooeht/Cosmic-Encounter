@@ -196,6 +196,9 @@ def main():
     for x in theGame.players:
       if x != plyr and x != desCard:
         x.confirmAlly(plyr, offAskPly, desCard, defAskPly)
+    # Artifacts
+    for x in theGame.players:
+      x.checkArtifacts("alliance")
 
     #planning
     plan = theGame.planning(plyr, desCard)

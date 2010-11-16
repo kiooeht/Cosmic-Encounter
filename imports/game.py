@@ -28,13 +28,16 @@ class game:
                    90,90,90,90,90, \
                    90,90,90,90,90, \
                    90,90,90,90,90, \
-                   91,91]
+                   91,91,          \
+                   92,92]
                    # 90 = N
                    # >= 91 Reserved for Artifacts
                    # 91 = MT (Mobius Tubes)
+                   # 92 = FF (Force Field)
     self.artDef = {}
     self.artDef[90] = "N"
     self.artDef[91] = mobius.mobius(self)
+    self.artDef[92] = forcefield.forcefield(self)
     self.cards   = deck(self.eCards)
     self.destiny = deck()
     self.numplyrs = 0
