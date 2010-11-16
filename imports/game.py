@@ -34,10 +34,12 @@ class game:
                    # >= 91 Reserved for Artifacts
                    # 91 = MT (Mobius Tubes)
                    # 92 = FF (Force Field)
+                   # 93 = EC (Emotion Control)
     self.artDef = {}
     self.artDef[90] = "N"
     self.artDef[91] = mobius.mobius(self)
     self.artDef[92] = forcefield.forcefield(self)
+    self.artDef[93] = emotion.emotion(self)
     self.cards   = deck(self.eCards)
     self.destiny = deck()
     self.numplyrs = 0

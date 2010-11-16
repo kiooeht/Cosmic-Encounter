@@ -205,6 +205,9 @@ def main():
 
     #reveal
     res = theGame.reveal(plyr,plan[0],desCard,plan[1],choice)
+    # Artifacts
+    for x in theGame.players:
+      x.checkArtifacts("reveal", res)
 
     #resolution
     successful = theGame.resolution(plyr, desCard, res, plan, choice)
