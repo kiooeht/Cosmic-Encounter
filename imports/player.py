@@ -165,7 +165,7 @@ class player:
   def giveCompensation(self, crd):
     return self.hand.pop(crd)
 
-  def checkArtifacts(self, phase):
+  def checkArtifacts(self, phase, *other):
     for x in self.hand:
       if x > 90:
         for p in self.theGame.artDef[x].phases:
@@ -174,7 +174,7 @@ class player:
               useArt = input(self.name+">> Would you like to use "+ \
                              self.theGame.artDef[x].name + "? [y/N]: ")
               if useArt.lower() == "y":
-                self.theGame.artDef[x].use(self)
+                self.theGame.artDef[x].use(self, other)
                 break
               elif useArt.lower() == "n" or useArt == "":
                 break

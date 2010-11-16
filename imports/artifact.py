@@ -5,5 +5,5 @@ class artifact:
     self.short   = sh
     self.phases  = ph
 
-  def use(self, plyr):
+  def use(self, plyr, other):
     return 0
