@@ -40,8 +40,8 @@ class game:
     self.artDef[91] = mobius.mobius(self)
     self.artDef[92] = forcefield.forcefield(self)
     self.artDef[93] = emotion.emotion(self)
-    self.cards   = deck(self.eCards)
-    self.destiny = deck()
+    self.cards   = deck(self, self.eCards)
+    self.destiny = deck(self)
     self.numplyrs = 0
     self.mothership = {}
     self.carriership = {}

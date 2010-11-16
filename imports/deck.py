@@ -2,7 +2,8 @@ import sys
 import random
 
 class deck:
-  def __init__(self,contents=[]):
+  def __init__(self, g, contents=[]):
+    self.theGame = g
     self.cards   = contents
     self.discard = []
     random.shuffle(self.cards)
@@ -38,17 +39,20 @@ class deck:
       sys.stdout.write(str(l))
     sys.stdout.write(" | | ")
     if len(self.discard) > 0:
-      if self.discard[len(self.discard)-1] == 99:
-        sys.stdout.write("N ")
+      if self.discard[len(self.discard)-1] == 90:
+        sys.stdout.write(self.theGame.artDef[90]+" ")
       else:
         if type(self.discard[len(self.discard)-1]).__name__ != "int":
           if self.discard[len(self.discard)-1].num <= 9:
             sys.stdout.write("0")
           sys.stdout.write(str(self.discard[len(self.discard)-1].num))
         else:
-          if self.discard[len(self.discard)-1] <= 9:
-            sys.stdout.write("0")
-          sys.stdout.write(str(self.discard[len(self.discard)-1]))
+          if self.discard[len(self.discard)-1] > 90:
+            sys.stdout.write(self.theGame.artDef[self.discard[len(self.discard)-1]].short)
+          else:
+            if self.discard[len(self.discard)-1] <= 9:
+              sys.stdout.write("0")
+            sys.stdout.write(str(self.discard[len(self.discard)-1]))
     else:
       sys.stdout.write("NA")
     sys.stdout.write(" |")
