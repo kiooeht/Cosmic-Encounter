@@ -58,7 +58,11 @@ class deck:
     sys.stdout.write(" |")
     print("")
     print("|    | |    |")
-    print("+----+ +----+")
+    print("+----+ +----",end='')
+    if type(self.discard[len(self.discard)-1]).__name__ == "int" and self.discard[len(self.discard)-1] > 90:
+      print("A")
+    else:
+      print("+")
 
   def showDeck(self):
     l = len(self.cards)

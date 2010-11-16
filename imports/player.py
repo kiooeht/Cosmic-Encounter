@@ -97,7 +97,11 @@ class player:
         sys.stdout.write("|    | ")
       print("")
       for x in range(0+(l-lt),7+(l-lt)):
-        sys.stdout.write("+----+ ")
+        sys.stdout.write("+----")
+        if self.hand[x] > 90:
+          sys.stdout.write("A ")
+        else:
+          sys.stdout.write("+ ")
       print("")
       lt -= 7
     if lt != 0:
@@ -124,7 +128,11 @@ class player:
         sys.stdout.write("|    | ")
       print("")
       for x in range(l-lt,l):
-        sys.stdout.write("+----+ ")
+        sys.stdout.write("+----")
+        if self.hand[x] > 90:
+          sys.stdout.write("A ")
+        else:
+          sys.stdout.write("+ ")
       print("")
 
   def drawHand(self,n):
