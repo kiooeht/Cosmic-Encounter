@@ -82,10 +82,10 @@ class player:
       print("")
       for x in range(0+(l-lt),7+(l-lt)):
         sys.stdout.write("| ")
-        if self.hand[x] >= 90:
-          sys.stdout.write(self.theGame.artDef[self.hand[x]])
-          if len(self.theGame.artDef[self.hand[x]]) == 1:
-            sys.stdout.write(" ")
+        if self.hand[x] == 90:
+          sys.stdout.write("N ")
+        elif self.hand[x] > 90:
+          sys.stdout.write(self.theGame.artDef[self.hand[x]].short)
         else:
           if self.hand[x] < 10: sys.stdout.write("0")
           sys.stdout.write(str(self.hand[x]))
@@ -109,10 +109,10 @@ class player:
       print("")
       for x in range(l-lt,l):
         sys.stdout.write("| ")
-        if self.hand[x] >= 90:
-          sys.stdout.write(self.theGame.artDef[self.hand[x]])
-          if len(self.theGame.artDef[self.hand[x]]) == 1:
-            sys.stdout.write(" ")
+        if self.hand[x] == 90:
+          sys.stdout.write("N ")
+        elif self.hand[x] > 90:
+          sys.stdout.write(self.theGame.artDef[self.hand[x]].short)
         else:
           if self.hand[x] < 10: sys.stdout.write("0")
           sys.stdout.write(str(self.hand[x]))
@@ -164,6 +164,22 @@ class player:
 
   def giveCompensation(self, crd):
     return self.hand.pop(crd)
+
+  def checkArtifacts(self, phase):
+    for x in self.hand:
+      if x > 90:
+        for p in self.theGame.artDef[x].phases:
+          if p == phase:
+            while 1:
+              useArt = input("Would you like to use "+ \
+                             self.theGame.artDef[x].name + "? [y/N]: ")
+              if useArt.lower() == "y":
+                self.theGame.artDef[x].use(self)
+                break
+              elif useArt.lower() == "n" or useArt == "":
+                break
+              else:
+                print("WTF? Use proper answers")
 
   def colonize(self,plnt,shps):
     plnt.editShips(self,shps)

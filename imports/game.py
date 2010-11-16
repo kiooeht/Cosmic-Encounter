@@ -1,6 +1,7 @@
 from .deck import *
 from .drawing import *
 import powers
+from artifacts import *
 
 class game:
   def __init__(self):
@@ -33,7 +34,7 @@ class game:
                    # 91 = MT (Mobius Tubes)
     self.artDef = {}
     self.artDef[90] = "N"
-    self.artDef[91] = "MT"
+    self.artDef[91] = mobius.mobius(self)
     self.cards   = deck(self.eCards)
     self.destiny = deck()
     self.numplyrs = 0
@@ -55,6 +56,11 @@ class game:
       self.warp[plyr] -= 1
       self.mothership[plyr] += 1
     plyr.moveShips()
+    for x in self.players:
+      if x == plyr:
+        x.checkArtifacts("turn start")
+      else:
+        x.checkArtifacts("regroup")
 
 ########## Destiny ##########
   def destinyPhase(self, plyr, desCards):
