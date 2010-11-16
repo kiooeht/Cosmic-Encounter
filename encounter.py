@@ -211,6 +211,11 @@ def main():
 
     #resolution
     successful = theGame.resolution(plyr, desCard, res, plan, choice)
+    # Artifacts
+    tempsuccess = [successful]
+    for x in theGame.players:
+      x.checkArtifacts("resolution", desCard, res, tempsuccess)
+    successful = tempsuccess[0]
 
     #end turn
     theGame.endTurn(plyr, successful)
