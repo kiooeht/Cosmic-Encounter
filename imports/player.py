@@ -20,9 +20,6 @@ class player:
     self.mathOverrideOppo = False
     self.calcWin = False
 
-  def getMyGame(self):
-    return self.game
-
   def getShipCount(self):
     n = 0
     for x in self.theGame.players:
