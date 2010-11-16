@@ -5,7 +5,7 @@ class mobius(artifact):
   def __init__(self, g):
     super().__init__(g, "Mobius Tubes", "MT", "turn start")
 
-  def use(self, plyr, other):
+  def use(self, plyr, crd, other):
     print("All ships in warp returned to players")
     for x in self.theGame.warp:
       if self.theGame.warp[x] > 0:
@@ -13,3 +13,4 @@ class mobius(artifact):
         draw(self.theGame)
         x.placeShips(self.theGame.warp[x])
         self.theGame.warp[x] = 0
+    super().use(plyr, crd, other)

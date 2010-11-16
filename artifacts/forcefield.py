@@ -5,7 +5,7 @@ class forcefield(artifact):
   def __init__(self, g):
     super().__init__(g, "Force Field", "FF", "alliance")
 
-  def use(self, plyr, other):
+  def use(self, plyr, crd, other):
     for x in self.theGame.mothership:
       if x != "owner":
         if x != self.theGame.players[self.theGame.plyrix]:
@@ -20,3 +20,4 @@ class forcefield(artifact):
         draw(self.theGame)
         x.placeShips(self.theGame.carriership[x])
         self.theGame.carriership[x] = 0
+    super().use(plyr, crd, other)

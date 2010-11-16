@@ -5,5 +5,5 @@ class artifact:
     self.short   = sh
     self.phases  = ph
 
-  def use(self, plyr, other):
-    return 0
+  def use(self, plyr, crd, other):
+    plyr.discardCard(crd)

@@ -19,6 +19,7 @@ class player:
     self.mathOverrideSelf = False
     self.mathOverrideOppo = False
     self.calcWin = False
+    self.getCard(91)
 
   def getShipCount(self):
     n = 0
@@ -166,6 +167,7 @@ class player:
     return self.hand.pop(crd)
 
   def checkArtifacts(self, phase, *other):
+    num = 0
     for x in self.hand:
       if x > 90:
         for p in self.theGame.artDef[x].phases:
@@ -174,12 +176,13 @@ class player:
               useArt = input(self.name+">> Would you like to use "+ \
                              self.theGame.artDef[x].name + "? [y/N]: ")
               if useArt.lower() == "y":
-                self.theGame.artDef[x].use(self, other)
+                self.theGame.artDef[x].use(self, num, other)
                 break
               elif useArt.lower() == "n" or useArt == "":
                 break
               else:
                 print("WTF? Use proper answers")
+      num += 1
 
   def colonize(self,plnt,shps):
     plnt.editShips(self,shps)
