@@ -67,7 +67,7 @@ class game:
     plyr.moveShips()
     for x in self.players:
       if x == plyr:
-        x.checkArtifacts("turn start")
+        x.checkArtifacts("start turn")
       else:
         x.checkArtifacts("regroup")
 
@@ -310,7 +310,7 @@ class game:
     return successful
 
   def negotiation(self, plyr, oppo):
-    print("You have one minutes to make a deal.")
+    print("You have one minute to make a deal.")
     while 1:
       deal = input("Was the deal successful? [Y/n]: ")
       if deal.lower() == "y" or deal == "":
