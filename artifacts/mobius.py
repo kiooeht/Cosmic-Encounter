@@ -8,7 +8,8 @@ class mobius(artifact):
   def use(self, plyr):
     print("All ships in warp returned to players")
     for x in self.theGame.warp:
-      print(x.name+">> "+str(self.theGame.warp[x])+" ship(s) back")
-      draw(self.theGame)
-      x.placeShips(self.theGame.warp[x])
-      self.theGame.warp[x] = 0
+      if self.theGame.warp[x] > 0:
+        print(x.name+">> "+str(self.theGame.warp[x])+" ship(s) back")
+        draw(self.theGame)
+        x.placeShips(self.theGame.warp[x])
+        self.theGame.warp[x] = 0
