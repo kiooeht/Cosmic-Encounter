@@ -5,6 +5,7 @@ import random
 import time
 
 sys.path.append("./powers")
+sys.path.append("./artifacts")
 from imports.game import *
 from imports.player import *
 from imports.system import *

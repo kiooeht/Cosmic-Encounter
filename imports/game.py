@@ -1,7 +1,7 @@
 from .deck import *
 from .drawing import *
 import powers
-from artifacts import *
+import artifacts
 
 class game:
   def __init__(self):
@@ -41,11 +41,13 @@ class game:
                    # 95 = PL (Plague)
     self.artDef = {}
     self.artDef[90] = "N"
-    self.artDef[91] = mobius.mobius(self)
-    self.artDef[92] = forcefield.forcefield(self)
-    self.artDef[93] = emotion.emotion(self)
-    self.artDef[94] = quash.quash(self)
-    self.artDef[95] = plague.plague(self)
+     # Dynamic list of all artifacts
+    artNum = 91
+    for x in artifacts.__all__:
+      tempModule = __import__(x, globals(), locals(), [], 0)
+      self.artDef[artNum] = getattr(tempModule, x)(self)
+      artNum += 1
+
     self.cards   = deck(self, self.eCards)
     self.destiny = deck(self)
     self.numplyrs = 0
@@ -54,6 +56,7 @@ class game:
     self.winner = None
     self.gameover = False
     self.plyrix = 0
+
     # Create list of all power modules
     self.listPowers = {}
     for x in powers.__all__:
