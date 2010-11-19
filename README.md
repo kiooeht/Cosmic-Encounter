@@ -21,8 +21,8 @@ Tripler<br>
 Virus<br>
 Warpish<br>
 Warrior<br>
-Zombie
-
+Zombie<br>
+<br>
 <b>Half-Working:</b><br>
 Nothing! :)
 </td><td width="50%">
@@ -32,6 +32,6 @@ Mobius Tubes<br>
 Forcefield<br>
 Emotion Control<br>
 Quash<br>
-Plague
+Plague<br>
 </td></tr>
 </table>
