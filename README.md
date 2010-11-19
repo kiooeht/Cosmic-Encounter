@@ -4,7 +4,7 @@ This program is an attempt to recreate the board game "<a href="http://en.wikipe
 It is written in Python 3.1.2 and in it's current state it is just command line based.
 
 <table width="100%">
-<tr><td width="50%">
+<tr valign="top"><td width="50%">
 <h3>Powers</h3>
 <b>Working:</b><br>
 Anti-Matter<br>
