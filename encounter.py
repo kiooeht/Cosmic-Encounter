@@ -170,6 +170,12 @@ def main():
 
     #regroup
     theGame.regroup(plyr)
+    # Artifacts
+    for x in self.players:
+      if x == plyr:
+        x.checkArtifacts("start turn")
+      else:
+        x.checkArtifacts("regroup")
     #destiny
     desCard = theGame.destinyPhase(plyr, theGame.destiny)
     #launch

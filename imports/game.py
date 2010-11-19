@@ -70,11 +70,6 @@ class game:
       self.warp[plyr] -= 1
       self.mothership[plyr] += 1
     plyr.moveShips()
-    for x in self.players:
-      if x == plyr:
-        x.checkArtifacts("start turn")
-      else:
-        x.checkArtifacts("regroup")
 
 ########## Destiny ##########
   def destinyPhase(self, plyr, desCards):
