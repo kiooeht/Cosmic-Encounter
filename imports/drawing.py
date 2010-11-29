@@ -10,6 +10,8 @@ def printStats(theGame):
   print("----------------+------------------------------------------------")
   for x in theGame.players:
     stats = x.getStats()
+    if stats[0] == "player":
+      stats[0] = "none"
     print("\t",x.name, end='')
     if len(x.name) < 7: print("\t", end='')
     print("| ", end='')
