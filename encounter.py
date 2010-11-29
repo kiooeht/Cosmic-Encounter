@@ -171,7 +171,7 @@ def main():
     #regroup
     theGame.regroup(plyr)
     # Artifacts
-    for x in self.players:
+    for x in theGame.players:
       if x == plyr:
         x.checkArtifacts("start turn")
       else:
