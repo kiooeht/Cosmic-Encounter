@@ -20,6 +20,9 @@ class player:
     self.mathOverrideOppo = False
     self.calcWin = False
 
+  def getPower(self):
+    return self.__class__.__name__
+
   def getShipCount(self):
     n = 0
     for x in self.theGame.players:
@@ -61,6 +64,7 @@ class player:
 
   def getStats(self):
     stats = []
+    stats.append(self.getPower())
     stats.append(self.getShipCount())
     stats.append(self.getWarpCount())
     stats.append(self.getColonies())

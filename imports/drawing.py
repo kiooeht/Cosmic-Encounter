@@ -6,17 +6,20 @@ def draw(theGame):
     x.system.draw()
 
 def printStats(theGame):
-  print("Stats           | Ships   Colonies   Planets   Cards  ")
-  print("----------------+-------------------------------------")
+  print("Stats           | Power      Ships   Colonies   Planets   Cards  ")
+  print("----------------+------------------------------------------------")
   for x in theGame.players:
     stats = x.getStats()
     print("\t",x.name, end='')
     if len(x.name) < 7: print("\t", end='')
     print("| ", end='')
-    sys.stdout.write(str(stats[0]))
-    sys.stdout.write("/")
+    sys.stdout.write(stats[0])
+    for x in range(0, 11-len(stats[0])):
+      sys.stdout.write(" ")
     sys.stdout.write(str(stats[1]))
-    print("\t ",stats[2],"\t    ",stats[3],"\t      ",stats[4])
+    sys.stdout.write("/")
+    sys.stdout.write(str(stats[2]))
+    print("\t ",stats[3],"\t    ",stats[4],"\t      ",stats[5])
   print("")
 
 def drawReveal(offAttack, defAttack):
