@@ -7,16 +7,21 @@ class warrior(player):
 
   def winEncounter(self, off, dest, choice):
     super().winEncounter(off, dest, choice)
-    self.tokens += 1
+    if self.hasPower:
+      self.tokens += 1
 
   def loseEncounter(self, off, dest, choice):
     super().loseEncounter(off, dest, choice)
-    self.tokens += 2
+    if self.hasPower:
+      self.tokens += 2
 
   def revealMath(self, aV):
-    if aV[0] != "N":
-      aV[3] = aV[0] + aV[1] + aV[2] + self.tokens
+    if not self.hasPower:
+      return super().revealMath(aV)
     else:
-      aV[3] = "N"
+      if aV[0] != "N":
+        aV[3] = aV[0] + aV[1] + aV[2] + self.tokens
+      else:
+        aV[3] = "N"
 
-    return aV
+      return aV

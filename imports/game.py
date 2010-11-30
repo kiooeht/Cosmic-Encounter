@@ -259,16 +259,17 @@ class game:
     defAttackValue = dest.revealMath(defAttackValue)
 
     for x in self.players:
-      if x.mathOverrideSelf:
-        if x == plyr:
-          offAttackValue = x.powerMath(offAttackValue)
-        elif x == dest:
-          defAttackValue = x.powerMath(defAttackValue)
-      if x.mathOverrideOppo:
-        if x == plyr:
-          defAttackValue = x.powerMath(defAttackValue)
-        elif x == dest:
-          offAttackValue = x.powerMath(offAttackValue)
+      if x.hasPower:
+        if x.mathOverrideSelf:
+          if x == plyr:
+            offAttackValue = x.powerMath(offAttackValue)
+          elif x == dest:
+            defAttackValue = x.powerMath(defAttackValue)
+        if x.mathOverrideOppo:
+          if x == plyr:
+            defAttackValue = x.powerMath(defAttackValue)
+          elif x == dest:
+            offAttackValue = x.powerMath(offAttackValue)
 
     drawReveal(offAttackValue, defAttackValue)
 

@@ -2,9 +2,12 @@ from imports.player import *
 
 class warpish(player):
   def revealMath(self, aV):
-    if aV[0] != "N":
-      aV[3] = aV[0] + aV[1] + aV[2] + sum([i for i in self.theGame.warp.values()])
+    if not self.hasPower:
+      return super().revealMath(aV)
     else:
-      aV[3] = "N"
+      if aV[0] != "N":
+        aV[3] = aV[0] + aV[1] + aV[2] + sum([i for i in self.theGame.warp.values()])
+      else:
+        aV[3] = "N"
 
-    return aV
+      return aV

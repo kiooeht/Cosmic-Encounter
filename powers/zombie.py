@@ -3,6 +3,9 @@ from imports.drawing import draw
 
 class zombie(player):
   def killShips(self, num, loc, locN):
-    loc[locN] -= num
-    draw(self.theGame)
-    self.placeShips(num)
+    if not self.hasPower:
+      super().killShips(num, loc, locN)
+    else:
+      loc[locN] -= num
+      draw(self.theGame)
+      self.placeShips(num)

@@ -20,16 +20,19 @@ class mirror(player):
     return aV
 
   def beforeCardsChosen(self, theGame, plyr, oppo):
-    if self == plyr or self == oppo:
-      while 1:
-        checkMirror = input(self.name+">> Would you like to mirror? [y/n]: ")
-        if checkMirror.lower() == "n":
-          self.mathOverrideSelf = False
-          self.mathOverrideOppo = False
-          return 0
-        elif checkMirror.lower() == "y":
-          self.mathOverrideSelf = True
-          self.mathOverrideOppo = True
-          return 0
-        else:
-          print("Whoa there, buddy! You need to input an answer in a correct format!")
+    if not self.hasPower:
+      return 0
+    else:
+      if self == plyr or self == oppo:
+        while 1:
+          checkMirror = input(self.name+">> Would you like to mirror? [y/n]: ")
+          if checkMirror.lower() == "n":
+            self.mathOverrideSelf = False
+            self.mathOverrideOppo = False
+            return 0
+          elif checkMirror.lower() == "y":
+            self.mathOverrideSelf = True
+            self.mathOverrideOppo = True
+            return 0
+          else:
+            print("Whoa there, buddy! You need to input an answer in a correct format!")

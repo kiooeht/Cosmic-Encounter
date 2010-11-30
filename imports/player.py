@@ -461,7 +461,7 @@ class player:
     return 0
 
   def afterLaunch(self, theGame, plyr, dest, choice):
-    return 0
+    return choice
 
   def powerMath(self, theGame, plyr, dest, attackValue):
     return 0
