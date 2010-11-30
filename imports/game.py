@@ -31,7 +31,8 @@ class game:
                    91,91,          \
                    92,92,          \
                    93,             \
-                   94]
+                   94,             \
+                   95]
                    # 90 = N
                    # >= 91 Reserved for Artifacts
                    # 91 = MT (Mobius Tubes)
