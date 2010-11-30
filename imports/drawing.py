@@ -6,8 +6,8 @@ def draw(theGame):
     x.system.draw()
 
 def printStats(theGame):
-  print("Stats           | Power        Ships     Colonies   Planets   Cards  ")
-  print("----------------+----------------------------------------------------")
+  print("Stats           | Power      Ships   Colonies   Planets   Cards  ")
+  print("----------------+------------------------------------------------")
   for x in theGame.players:
     stats = x.getStats()
     if stats[0] == "player":
@@ -18,7 +18,7 @@ def printStats(theGame):
     if len(x.name) < 7: print("\t", end='')
     print("| ", end='')
     sys.stdout.write(stats[0])
-    for x in range(0, 13-len(stats[0])):
+    for x in range(0, 11-len(stats[0])):
       sys.stdout.write(" ")
     sys.stdout.write(str(stats[1]))
     sys.stdout.write("/")
