@@ -6,8 +6,8 @@ def draw(theGame):
     x.system.draw()
 
 def printStats(theGame):
-  print("Stats           | Power      Ships   Colonies   Planets   Cards  ")
-  print("----------------+------------------------------------------------")
+  print("Stats           | Power      Ships        Colonies   Planets   Cards  ")
+  print("----------------+-----------------------------------------------------")
   for x in theGame.players:
     stats = x.getStats()
     if stats[0] == "player":
