@@ -12,6 +12,8 @@ def printStats(theGame):
     stats = x.getStats()
     if stats[0] == "player":
       stats[0] = "none"
+    elif not x.checkPower():
+      stats[0] = "lost"
     print("\t",x.name, end='')
     if len(x.name) < 7: print("\t", end='')
     print("| ", end='')

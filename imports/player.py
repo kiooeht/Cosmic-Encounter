@@ -12,10 +12,12 @@ class player:
     self.num    = n
     self.name   = ident
     self.system = system(self.theGame, self, pps, spp)
+    self.initialPlanets = pps
     self.hand   = []
     self.initialHand = crd
     self.drawHand(self.initialHand)
     self.encounterNumber = 1
+    self.hasPower = True
     self.mathOverrideSelf = False
     self.mathOverrideOppo = False
     self.calcWin = False
@@ -433,7 +435,7 @@ class player:
             x.killShips(self.theGame.carriership[x], self.theGame.carriership, x)
         ## kill defense ships
         dest.killShips(choice[2].system.planet[int(choice[0])].ships[dest], choice[2].system.planet[int(choice[0])].ships, dest)
-    #else:
+    self.checkPower()
 
 
   # Ending
@@ -442,6 +444,13 @@ class player:
       return True
     else:
       return False
+
+  def checkPower(self):
+    if self.getPlanets() < round(self.initialPlanets/2 + 0.5):
+      self.hasPower = False
+    else:
+      self.hasPower = True
+    return self.hasPower
 
 
 ###########################################
