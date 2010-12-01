@@ -31,5 +31,5 @@ class antimatter(player):
   def winCalcuation(self, res):
     if not self.hasPower or self.zapped:
       return res[0] > res[1]
-    else
+    else:
       return res[0] < res[1]
