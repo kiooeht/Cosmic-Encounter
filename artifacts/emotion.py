@@ -6,7 +6,9 @@ class emotion(artifact):
 
   def use(self, plyr, crd, other):
     print("Main players must attempt to make a deal")
-    res = list(other)[0]
-    res[0] = "N"
-    res[1] = "N"
-    super().use(plyr, crd, other)
+    worked = super().use(plyr, crd, other)
+
+    if worked:
+      res = list(other)[0]
+      res[0] = "N"
+      res[1] = "N"

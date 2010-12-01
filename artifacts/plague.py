@@ -18,53 +18,56 @@ class plague(artifact):
         print("That player does not exist")
 
     print(plyrPlague.name+">> You have been Plagued!")
-    print("Kill 3 ships")
-    draw(self.theGame)
-    self.theGame.carriership[plyrPlague] += plyrPlague.getShips(3, 3)
-    plyrPlague.killShips(3, self.theGame.carriership, plyrPlague)
-    print("Discard 1 card of each type (Attack, Negotiate, Artifact)")
-    numCrd = [0]*3
-    for x in plyrPlague.hand:
-      if x < 90:    numCrd[0] += 1
-      elif x == 90: numCrd[1] += 1
-      elif x > 90:  numCrd[2] += 1
-    if numCrd == [0]*3:
-      print("No cards to discard")
-    else:
-      if numCrd[0] > 0:
-        plyrPlague.showHand()
-        while 1:
-          attNum = input("Select Attack card to discard [0-"+str(len(plyrPlague.hand)-1)+"]: ")
-          if attNum.isdigit() and int(attNum) < len(plyrPlague.hand) and int(attNum) >= 0:
-            if plyrPlague.hand[int(attNum)] < 90:
-              plyrPlague.discardCard(int(attNum))
-              break
+
+    worked = super().use(plyr, crd, other)
+
+    if worked:
+      print("Kill 3 ships")
+      draw(self.theGame)
+      self.theGame.carriership[plyrPlague] += plyrPlague.getShips(3, 3)
+      plyrPlague.killShips(3, self.theGame.carriership, plyrPlague)
+      print("Discard 1 card of each type (Attack, Negotiate, Artifact)")
+      numCrd = [0]*3
+      for x in plyrPlague.hand:
+        if x < 90:    numCrd[0] += 1
+        elif x == 90: numCrd[1] += 1
+        elif x > 90:  numCrd[2] += 1
+      if numCrd == [0]*3:
+        print("No cards to discard")
+      else:
+        if numCrd[0] > 0:
+          plyrPlague.showHand()
+          while 1:
+            attNum = input("Select Attack card to discard [0-"+str(len(plyrPlague.hand)-1)+"]: ")
+            if attNum.isdigit() and int(attNum) < len(plyrPlague.hand) and int(attNum) >= 0:
+              if plyrPlague.hand[int(attNum)] < 90:
+                plyrPlague.discardCard(int(attNum))
+                break
+              else:
+                print("That is not an Attack card")
             else:
-              print("That is not an Attack card")
-          else:
-            print("That card does not exist")
-      if numCrd[1] > 0:
-        plyrPlague.showHand()
-        while 1:
-          negNum = input("Select Negotiate card to discard [0-"+str(len(plyrPlague.hand)-1)+"]: ")
-          if negNum.isdigit() and int(negNum) < len(plyrPlague.hand) and int(negNum) >= 0:
-            if plyrPlague.hand[int(negNum)] == 90:
-              plyrPlague.discardCard(int(negNum))
-              break
+              print("That card does not exist")
+        if numCrd[1] > 0:
+          plyrPlague.showHand()
+          while 1:
+            negNum = input("Select Negotiate card to discard [0-"+str(len(plyrPlague.hand)-1)+"]: ")
+            if negNum.isdigit() and int(negNum) < len(plyrPlague.hand) and int(negNum) >= 0:
+              if plyrPlague.hand[int(negNum)] == 90:
+                plyrPlague.discardCard(int(negNum))
+                break
+              else:
+                print("That is not a Negotiate card")
             else:
-              print("That is not a Negotiate card")
-          else:
-            print("That card does not exist")
-      if numCrd[2] > 0:
-        plyrPlague.showHand()
-        while 1:
-          artNum = input("Select Artifact card to discard [0-"+str(len(plyrPlague.hand)-1)+"]: ")
-          if artNum.isdigit() and int(artNum) < len(plyrPlague.hand) and int(artNum) >= 0:
-            if plyrPlague.hand[int(artNum)] > 90:
-              plyrPlague.discardCard(int(artNum))
-              break
+              print("That card does not exist")
+        if numCrd[2] > 0:
+          plyrPlague.showHand()
+          while 1:
+            artNum = input("Select Artifact card to discard [0-"+str(len(plyrPlague.hand)-1)+"]: ")
+            if artNum.isdigit() and int(artNum) < len(plyrPlague.hand) and int(artNum) >= 0:
+              if plyrPlague.hand[int(artNum)] > 90:
+                plyrPlague.discardCard(int(artNum))
+                break
+              else:
+                print("That is not an Artifact card")
             else:
-              print("That is not an Artifact card")
-          else:
-            print("That card does not exist")
-    super().use(plyr, crd, other)
+              print("That card does not exist")

@@ -7,10 +7,12 @@ class mobius(artifact):
 
   def use(self, plyr, crd, other):
     print("All ships in warp returned to players")
-    for x in self.theGame.warp:
-      if self.theGame.warp[x] > 0:
-        print(x.name+">> "+str(self.theGame.warp[x])+" ship(s) back")
-        draw(self.theGame)
-        x.placeShips(self.theGame.warp[x])
-        self.theGame.warp[x] = 0
-    super().use(plyr, crd, other)
+    worked = super().use(plyr, crd, other)
+
+    if worked:
+      for x in self.theGame.warp:
+        if self.theGame.warp[x] > 0:
+          print(x.name+">> "+str(self.theGame.warp[x])+" ship(s) back")
+          draw(self.theGame)
+          x.placeShips(self.theGame.warp[x])
+          self.theGame.warp[x] = 0

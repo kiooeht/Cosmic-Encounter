@@ -6,18 +6,21 @@ class forcefield(artifact):
     super().__init__(g, "Force Field", "FF", "alliance")
 
   def use(self, plyr, crd, other):
-    for x in self.theGame.mothership:
-      if x != "owner":
-        if x != self.theGame.players[self.theGame.plyrix]:
-          if self.theGame.mothership[x] > 0:
-            print(x.name+">>")
-            draw(self.theGame)
-            x.placeShips(self.theGame.mothership[x])
-            self.theGame.mothership[x] = 0
-    for x in self.theGame.carriership:
-      if self.theGame.carriership[x] > 0:
-        print(x.name+">>")
-        draw(self.theGame)
-        x.placeShips(self.theGame.carriership[x])
-        self.theGame.carriership[x] = 0
-    super().use(plyr, crd, other)
+    print("Allies have been blocked")
+    worked = super().use(plyr, crd, other)
+
+    if worked:
+      for x in self.theGame.mothership:
+        if x != "owner":
+          if x != self.theGame.players[self.theGame.plyrix]:
+            if self.theGame.mothership[x] > 0:
+              print(x.name+">>")
+              draw(self.theGame)
+              x.placeShips(self.theGame.mothership[x])
+              self.theGame.mothership[x] = 0
+      for x in self.theGame.carriership:
+        if self.theGame.carriership[x] > 0:
+          print(x.name+">>")
+          draw(self.theGame)
+          x.placeShips(self.theGame.carriership[x])
+          self.theGame.carriership[x] = 0
