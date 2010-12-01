@@ -2,7 +2,7 @@ from imports.player import *
 
 class clone(player):
   def discardUsedECard(self, crd):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       super().discardUsedECard(crd)
     else:
       if crd < 90:

@@ -2,7 +2,7 @@ from imports.player import *
 
 class trader(player):
   def beforeCardsChosen(self, theGame, plyr, oppo):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().beforeCardsChosen(theGame, plyr, oppo)
     else:
       if self == plyr or self == oppo:

@@ -2,7 +2,7 @@ from imports.player import *
 
 class masochist(player):
   def checkWin(self):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().checkWin()
     else:
       if self.getColonies() >= 5 or self.getShipCount() <= 0:

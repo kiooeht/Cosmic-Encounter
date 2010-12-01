@@ -5,7 +5,7 @@ from imports.player import *
 
 class mite(player):
   def afterLaunch(self, theGame, plyr, dest, choice):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().afterLaunch(theGame, plyr, dest, choice)
     else:
       if plyr == self:

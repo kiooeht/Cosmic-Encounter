@@ -3,7 +3,7 @@ from imports.drawing import printStats
 
 class hacker(player):
   def getCompensation(self,plyr,n):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       super().getCompensation(plyr,n)
     else:
       print(self.name+">>")
@@ -30,7 +30,7 @@ class hacker(player):
             print("That does not exist in their hand")
 
   def giveCompensation(self, crd):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().giveCompensation(crd)
     else:
       while 1:

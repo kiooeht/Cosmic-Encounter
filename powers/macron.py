@@ -2,13 +2,13 @@ from imports.player import *
 
 class macron(player):
   def maxShipsPerLoad(self):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().maxShipsPerLoad()
     else:
       return 1
 
   def revealMath(self, aV):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().revealMath(aV)
     else:
       if aV[0] != "N":
@@ -19,7 +19,7 @@ class macron(player):
       return aV
 
   def shipWorth(self, num):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().shipWorth(num)
     else:
       return num * 4

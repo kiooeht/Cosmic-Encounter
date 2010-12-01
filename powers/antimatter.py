@@ -7,7 +7,7 @@ class antimatter(player):
     self.calcWin = True
 
   def revealMath(self, aV):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().revealMath(aV)
     else:
       if aV[0] != "N":
@@ -18,12 +18,18 @@ class antimatter(player):
       return aV
 
   def powerMath(self, aV):
-    if aV[0] != "N":
-      aV[3] -= 2 * aV[2]
+    if not self.hasPower or self.zapped:
+      return aV
     else:
-      aV[3] = "N"
+      if aV[0] != "N":
+        aV[3] -= 2 * aV[2]
+      else:
+        aV[3] = "N"
 
-    return aV
+      return aV
 
   def winCalcuation(self, res):
-    return res[0] < res[1]
+    if not self.hasPower or self.zapped:
+      return res[0] > res[1]
+    else
+      return res[0] < res[1]

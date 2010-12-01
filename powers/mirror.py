@@ -14,13 +14,16 @@ class mirror(player):
     return int(result[::-1])
 
   def powerMath(self, aV):
-    if aV[0] != "N":
-      aV[0] = self.rev(aV[0])
-      aV[3] = aV[0] + aV[1] + aV[2]
-    return aV
+    if not self.hasPower or self.zapped:
+      return aV
+    else:
+      if aV[0] != "N":
+        aV[0] = self.rev(aV[0])
+        aV[3] = aV[0] + aV[1] + aV[2]
+      return aV
 
   def beforeCardsChosen(self, theGame, plyr, oppo):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return 0
     else:
       if self == plyr or self == oppo:

@@ -2,7 +2,7 @@ from imports.player import *
 
 class machine(player):
   def goAgain(self, success):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().goAgain(success)
     else:
       if self.hasEncounterCards():

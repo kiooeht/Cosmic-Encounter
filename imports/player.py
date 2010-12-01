@@ -18,6 +18,7 @@ class player:
     self.drawHand(self.initialHand)
     self.encounterNumber = 1
     self.hasPower = True
+    self.zapped = False
     self.mathOverrideSelf = False
     self.mathOverrideOppo = False
     self.calcWin = False

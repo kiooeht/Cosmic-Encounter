@@ -16,7 +16,7 @@ class warrior(player):
       self.tokens += 2
 
   def revealMath(self, aV):
-    if not self.hasPower:
+    if not self.hasPower or self.zapped:
       return super().revealMath(aV)
     else:
       if aV[0] != "N":
