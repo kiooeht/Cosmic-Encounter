@@ -33,7 +33,8 @@ class game:
                    93,             \
                    94,             \
                    95,             \
-                   96,96]
+                   96,96,          \
+                   97,97]
                    # 90 = N
                    # >= 91 Reserved for Artifacts
                    # 91 = MT (Mobius Tubes)
@@ -42,6 +43,7 @@ class game:
                    # 94 = QA (Quash)
                    # 95 = PL (Plague)
                    # 96 = AC (Anti Card [Card Zap])
+                   # 97 = CZ (Cosmic Zap)
     self.artDef = {}
     self.artDef[90] = "N"
      # Dynamic list of all artifacts

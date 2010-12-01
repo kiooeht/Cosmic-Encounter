@@ -1,1 +1,1 @@
-__all__ = ["mobius", "forcefield", "emotion", "quash", "plague", "cardzap"]
+__all__ = ["mobius", "forcefield", "emotion", "quash", "plague", "cardzap", "cosmiczap"]
