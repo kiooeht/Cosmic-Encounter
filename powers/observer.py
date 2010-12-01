@@ -2,6 +2,7 @@ from imports.player import *
 
 class observer(player):
   def loseEncounter(self, off, dest, choice):
+    self.usePower()
     if not self.hasPower or self.zapped:
       super().loseEncounter(off, dest, choice)
     else:
@@ -16,6 +17,7 @@ class observer(player):
       self.checkPower()
 
   def killShips(self, num, loc, locN):
+    self.usePower()
     if not self.hasPower or self.zapped:
       super().killShips()
     else:

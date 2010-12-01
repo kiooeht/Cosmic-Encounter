@@ -3,6 +3,7 @@ from imports.drawing import draw
 
 class zombie(player):
   def killShips(self, num, loc, locN):
+    self.usePower()
     if not self.hasPower or self.zapped:
       super().killShips(num, loc, locN)
     else:

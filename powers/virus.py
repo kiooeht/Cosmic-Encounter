@@ -2,6 +2,7 @@ from imports.player import *
 
 class virus(player):
   def revealMath(self, aV):
+    self.usePower()
     if not self.hasPower or self.zapped:
       return super().revealMath(aV)
     else:

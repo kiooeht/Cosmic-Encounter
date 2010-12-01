@@ -12,7 +12,11 @@ class clone(player):
       while 1:
         keep = input(self.name+">> Would you like to keep the encounter card ("+printCrd+")? [Y/n]: ")
         if keep.lower() == "y" or keep.lower() == "":
-          self.getCard(crd)
+          self.usePower()
+          if not self.zapped:
+            self.getCard(crd)
+          else:
+            self.theGame.cards.discardCard(crd)
           break
         elif keep.lower() == "n":
           self.theGame.cards.discardCard(crd)

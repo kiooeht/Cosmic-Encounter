@@ -457,6 +457,11 @@ class player:
 ###########################################
 ### EXTRA POWER PHASE POSSIBILITIES #######
 ###########################################
+  def usePower(self):
+    # Artifacts
+    for x in self.theGame.players:
+      x.checkArtifacts("power", self)
+
   def beforeCardsChosen(self, theGame, plyr, oppo):
     # Do nothing
     return 0

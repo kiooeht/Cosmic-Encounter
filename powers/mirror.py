@@ -14,6 +14,7 @@ class mirror(player):
     return int(result[::-1])
 
   def powerMath(self, aV):
+    self.usePower()
     if not self.hasPower or self.zapped:
       return aV
     else:
@@ -34,8 +35,10 @@ class mirror(player):
             self.mathOverrideOppo = False
             return 0
           elif checkMirror.lower() == "y":
-            self.mathOverrideSelf = True
-            self.mathOverrideOppo = True
+            self.usePower()
+            if not self.zapped:
+              self.mathOverrideSelf = True
+              self.mathOverrideOppo = True
             return 0
           else:
             print("Whoa there, buddy! You need to input an answer in a correct format!")

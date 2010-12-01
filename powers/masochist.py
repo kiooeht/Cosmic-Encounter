@@ -2,6 +2,7 @@ from imports.player import *
 
 class masochist(player):
   def checkWin(self):
+    self.usePower()
     if not self.hasPower or self.zapped:
       return super().checkWin()
     else:

@@ -11,10 +11,14 @@ class trader(player):
         while 1:
           trade = input(self.name+">> Trade hands with other player? [y/n]: ")
           if trade.lower() == "y":
-            spare = self.hand
-            self.hand = switch.hand
-            switch.hand = spare
-            return 1
+            self.usePower()
+            if not self.zapped:
+              spare = self.hand
+              self.hand = switch.hand
+              switch.hand = spare
+              return 1
+            else:
+              return super().beforeCardsChosen(theGame, plyr, oppo)
           elif trade.lower() == "n":
             return 0
           else:
