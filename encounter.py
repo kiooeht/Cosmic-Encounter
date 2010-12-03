@@ -151,6 +151,7 @@ def main():
     choice  = input("Add more players? [Y/n]: ")
     if choice.lower() == "n": moreplayers = False
 
+  theGame.promptPlyrs([])
   #start loop
   random.seed(time.gmtime())
   # Random starting player

@@ -69,6 +69,14 @@ class game:
     self.usedPowers = []
     self.powerOpts = "random"
 
+    # Commands
+    self.plyrCmds = {}
+    self.plyrCmds["showhand"]   = "showHand"
+    self.otherCmds = {}
+    self.otherCmds["help"]      = "cmdHelp"
+    self.otherCmds["draw"]      = "draw"
+    self.otherCmds["stats"]     = "printStats"
+
 ########## Regroup ##########
   def regroup(self, plyr):
     if plyr.getWarpCount() > 0:
@@ -351,3 +359,30 @@ class game:
 
     done = input("Is your name Amanda?: ")
     if done.lower() == "y": self.gameover = True
+
+
+########## Crazy Prompting Stuff ##########
+  def promptPlyrs(self, exempt):
+    plyrs = [i for i in self.players if i not in exempt]
+    for x in plyrs:
+      self.prompt(x)
+
+  def prompt(self, plyr):
+    while 1:
+      cmd = input(plyr.name+">> ")
+      if cmd.lower() == "done":
+        break;
+      elif cmd.lower() in self.plyrCmds:
+        getattr(plyr, self.plyrCmds[cmd.lower()])()
+      elif cmd.lower() in self.otherCmds:
+        globals()[self.otherCmds[cmd.lower()]](self)
+      else:
+        print(cmd+": command not found")
+
+# Purposely unindented
+def cmdHelp(theGame):
+  print("Commands are case insensitive")
+  print("help\t\tDisplay this message")
+  print("showHand\tDisplay your current hand")
+  print("draw\t\tDisplay every system and number of ships on each planet")
+  print("stats\t\tDisplay stats about each user (power, ships, colonies, planets, cards)")
