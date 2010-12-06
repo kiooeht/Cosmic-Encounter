@@ -2,6 +2,7 @@ from .deck import *
 from .drawing import *
 import powers
 import artifacts
+import os
 
 class game:
   def __init__(self):
@@ -372,6 +373,8 @@ class game:
       cmd = input(plyr.name+">> ")
       if cmd.lower() == "done":
         break;
+      elif cmd.lower() == "clear":
+        os.system(['clear','cls'][os.name == 'nt'])
       elif cmd.lower() in self.plyrCmds:
         getattr(plyr, self.plyrCmds[cmd.lower()])()
       elif cmd.lower() in self.otherCmds:
@@ -382,7 +385,11 @@ class game:
 # Purposely unindented
 def cmdHelp(theGame):
   print("Commands are case insensitive")
+  print("")
   print("help\t\tDisplay this message")
   print("showHand\tDisplay your current hand")
   print("draw\t\tDisplay every system and number of ships on each planet")
   print("stats\t\tDisplay stats about each user (power, ships, colonies, planets, cards)")
+  print("")
+  print("clear\t\tClear the screen")
+  print("done\t\tStop wth commands, continue")
