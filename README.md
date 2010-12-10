@@ -33,5 +33,7 @@ Forcefield<br>
 Emotion Control<br>
 Quash<br>
 Plague<br>
+Card Zap<br>
+Cosmic Zap<br>
 </td></tr>
 </table>
