@@ -208,7 +208,19 @@ class player:
     while n < maximum and not done:
       choice  = input("System, Planet, and Number of Ships (space deliminated): ")
       lst   = choice.split(" ")
-      yay   = 1
+      macro = (len(lst) > 0 and lst[0] == "m")
+      if macro:
+        macro = self.getShipsMacro(minimum,maximum,lst,n)
+        if macro < 0:
+          continue
+        else:
+          n += macro
+          if n == maximum:  break
+          if n >= minimum:
+            dne = input("You have selected "+str(n)+" ships, would you like to select more? [Y/n]: ")
+            if dne.lower() == "n": break
+          continue
+      yay = 1
       for x in range(0,len(lst)):
         if not lst[x].isdigit():
           yay = 0
@@ -235,6 +247,31 @@ class player:
         dne = input("You have selected "+str(n)+" ships, would you like to select more? [Y/n]: ")
         if dne.lower() == "n": break
     return n
+
+  def getShipsMacro(self,minimum,maximum,lst,n):
+    if len(lst) == 2:
+      if lst[1].isdigit():
+        if int(lst[1]) >= minimum:
+          if n + int(lst[1]) <= maximum:
+            if int(lst[1]) <= self.getShipCount():
+              while n < int(lst[1]):
+                highestNum = 0
+                hightest = None
+                for x in self.theGame.players:
+                  for p in x.system.planet:
+                    if self in p.ships:
+                      if p.ships[self] > highestNum:
+                        highestNum = p.ships[self]
+                        highest = p
+                n += 1
+                highest.editShips(self,-1)
+              return n
+            else:   print("You do not have enough ships")
+          else:     print("You have selected more ships than you're allowed")
+        else:       print("You have not selected enough ships")
+      else:         print("Second argument must be an int")
+    else:           print("Wrong number of arguments")
+    return -1
 
   def placeShips(self,n):
     while n > 0:
