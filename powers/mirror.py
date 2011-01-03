@@ -23,7 +23,7 @@ class mirror(player):
         aV[3] = aV[0] + aV[1] + aV[2]
       return aV
 
-  def beforeCardsChosen(self, theGame, plyr, oppo):
+  def afterCardsChosen(self, theGame, plyr, oppo):
     if not self.hasPower or self.zapped:
       return 0
     else:

@@ -503,6 +503,10 @@ class player:
     # Do nothing
     return 0
 
+  def afterCardsChosen(self, theGame, plyr, oppo):
+    # Do nothing
+    return 0
+
   def afterLaunch(self, theGame, plyr, dest, choice):
     return choice
 

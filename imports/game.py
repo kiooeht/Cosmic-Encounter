@@ -229,6 +229,9 @@ class game:
           print("That is not an encounter card")
       else:
         print("That does not exist in your hand")
+    # Do any power stuff that should be after chosing cards
+    for x in self.players:
+      x.afterCardsChosen(self, plyr, dest)
     return [offCard,defCard]
 
 ########## Reveal ##########
