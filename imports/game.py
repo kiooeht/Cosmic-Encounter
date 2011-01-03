@@ -72,7 +72,7 @@ class game:
 
     # Commands
     self.plyrCmds = {}
-    self.plyrCmds["showhand"]   = "showHand"
+    self.plyrCmds["hand"]   = "showHand"
     self.otherCmds = {}
     self.otherCmds["help"]      = "cmdHelp"
     self.otherCmds["draw"]      = "draw"
@@ -387,7 +387,7 @@ def cmdHelp(theGame):
   print("Commands are case insensitive")
   print("")
   print("help\t\tDisplay this message")
-  print("showHand\tDisplay your current hand")
+  print("hand\t\tDisplay your current hand")
   print("draw\t\tDisplay every system and number of ships on each planet")
   print("stats\t\tDisplay stats about each user (power, ships, colonies, planets, cards)")
   print("")
